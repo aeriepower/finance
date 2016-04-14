@@ -9,7 +9,9 @@ use Finance\Http\Requests;
 class ReportController extends Controller
 {
     public function index()
-        {
-            return view('report.index');
+    {
+        return view('report.index',[
+            'title' => 'Dashboard'
+        ]);
     }
 }
