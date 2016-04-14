@@ -10,6 +10,6 @@ class ReportController extends Controller
 {
     public function index()
         {
-            return view('welcome');
+            return view('report.index');
     }
 }
