@@ -11,5 +11,9 @@ return [
     'dropdown' => 'Dropdown',
     'login' => 'Login',
     'subitem' => 'Subitem',
-    'search' => 'Search'
+    'search' => 'Search',
+    'user' => 'User',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
+    'settings' => 'Settings'
 ];
