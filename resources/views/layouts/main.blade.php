@@ -51,8 +51,11 @@
 
     <div class="row">
         @include('layouts.highlight')
+
         @include('layouts.highlight')
+
         @include('layouts.highlight')
+
         @include('layouts.highlight')
     </div><!--/.row-->
 
@@ -70,42 +73,13 @@
     </div><!--/.row-->
 
     <div class="row">
-        <div class="col-xs-6 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body easypiechart-panel">
-                    <h4>New Orders</h4>
-                    <div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body easypiechart-panel">
-                    <h4>Comments</h4>
-                    <div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body easypiechart-panel">
-                    <h4>New Users</h4>
-                    <div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body easypiechart-panel">
-                    <h4>Visitors</h4>
-                    <div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('layouts.roundchart')
+
+        @include('layouts.roundchart')
+        
+        @include('layouts.roundchart')
+
+        @include('layouts.roundchart')
     </div><!--/.row-->
 
     <div class="row">
