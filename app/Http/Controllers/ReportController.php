@@ -8,5 +8,8 @@ use Finance\Http\Requests;
 
 class ReportController extends Controller
 {
-    //
+    public function index()
+        {
+            return view('welcome');
+    }
 }
