@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'dashboard' => 'dashboard',
-    'moves' => 'transacciones',
+    '/' => 'dashboard',
+    'transactions' => 'transacciones',
     'analysis' => 'análisis',
 ];
