@@ -9,8 +9,13 @@
         <?php
             $sidebarElements = trans('sidebar');
         ?>
-        @foreach ($sidebarElements as $element)
-            <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> {{ ucfirst($element) }}</a></li>
+        @foreach ($sidebarElements as $key => $value)
+            <li>
+                a href="{{ URL::route($key) }}">
+                    <svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
+                    {{ ucfirst($value) }}
+                </a>
+            </li>
         @endforeach
         {{--
         <li class="parent ">
