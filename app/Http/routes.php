@@ -13,3 +13,4 @@
 
 
 Route::get('/','ReportController@index');
+Route::get('transactions','ReportController@index');
