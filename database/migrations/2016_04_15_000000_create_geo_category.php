@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeoLocationsTable extends Migration
+class CreateGeCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,13 @@ class CreateGeoLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('geo_locations', function (Blueprint $table) {
+        Schema::table('geo_category', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name_es');
+            $table->string('name_en')->nullable();
+            $table->integer('order');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +29,8 @@ class CreateGeoLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('geo_locations');
+        Schema::table('geo_category', function (Blueprint $table) {
+            //
+        });
     }
 }

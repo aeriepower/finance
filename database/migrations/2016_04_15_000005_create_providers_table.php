@@ -12,9 +12,17 @@ class CreateProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('provider', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('logo')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('web')->nullable();
+            $table->string('description')->nullable();
+            $table->integer('geo_location_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('geo_location_id')->references('id')->on('geo_location');
         });
     }
 
