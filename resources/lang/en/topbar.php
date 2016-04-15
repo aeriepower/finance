@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'subitem' => 'Subitem',
     'search' => 'Search',
     'user' => 'User',
     'profile' => 'Profile',
