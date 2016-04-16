@@ -6,6 +6,7 @@ use Finance\Transaction;
 use Illuminate\Http\Request;
 
 use Finance\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -42,7 +43,26 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $userId = Auth::user()->id;
+
+        $account_balance = DB::table('transaction')->where('id', '=', $userId)->sum('amount') + $request['amount'];
+
+        $values = array(
+            'concept' => $request['concept'],
+            'data' => $request['data'],
+            'amount' => $request['amount'],
+            'account_balance' => $account_balance,
+            'datetime' => date('Y-m-d H:i:s'),
+            'billing' => $request['amount']>0?0:1,
+            'user_id' => $userId,
+            'category_id' => $request['category'],
+            'provider_id' => null
+        );
+
+        \Finance\Transaction::create($values);
+
+        return redirect('/transactions')->with('message','store');
     }
 
     /**
