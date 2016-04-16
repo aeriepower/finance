@@ -1,9 +1,6 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <a type="button" class="btn btn-success">
-            <i class="glyphicon glyphicon glyphicon-plus icon-list-alt"></i> {{ ucfirst(trans('helper.add')) . ' ' . $title }}
-        </a>
-    </div>
+    <!--div class="panel-heading">
+    </div-->
     <div class="panel-body">
         <table
                 data-toggle="table"
