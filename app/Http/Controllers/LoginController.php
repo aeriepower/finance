@@ -2,8 +2,11 @@
 
 namespace Finance\Http\Controllers;
 
+use Auth;
+use Session;
+use Redirect;
 use Illuminate\Http\Request;
-
+use Finance\Http\Requests\LoginRequest;
 use Finance\Http\Requests;
 
 class LoginController extends Controller
@@ -34,9 +37,18 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        //
+        $credentials = array(
+            'email' => $request['email'],
+            'password' => $request['password']
+        );
+        if(Auth::attempt($credentials)){
+            return Redirect::to('/');
+        } else {
+            Session::flash('msg-error', trans('helper.login-incorrect'));
+            return Redirect::to('loggin');
+        }
     }
 
     /**

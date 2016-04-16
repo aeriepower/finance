@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('category', trans('form.transaction-category')) !!}
-                    {!! Form::select('category', array($asdf), null, ['class' => 'form-control']) !!}
+                    {!! Form::select('category', array(), null, ['class' => 'form-control']) !!}
                 </div>
                 {!! Form::submit(trans('form.transaction-save'),['class' => 'form-control btn-info']) !!}
                 {!! Form::close() !!}

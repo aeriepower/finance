@@ -2,5 +2,6 @@
 
 return [
     'add' => 'Add',
-    'transaction' => 'transaction'
+    'transaction' => 'transaction',
+    'login-incorrect' => 'Wrong credentials'
 ];

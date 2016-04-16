@@ -25,10 +25,10 @@
                 {!! Form::open(array('action' => 'LoginController@store', 'method' => 'POST')) !!}
                     {!! Form::token() !!}
                     <div class="form-group">
-                        {!! Form::text('email',null,['class' => 'form-control', 'placeholder' => trans('form.login-email')]) !!}
+                        {!! Form::email('email',null,['class' => 'form-control', 'placeholder' => trans('form.login-email')]) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text('password',null,['class' => 'form-control', 'placeholder' => trans('form.login-password')]) !!}
+                        {!! Form::password('password',['class' => 'form-control', 'placeholder' => trans('form.login-password')]) !!}
                     </div>
                     {!! Form::submit(trans('form.login-save'),['class' => 'form-control btn-info']) !!}
                 {!! Form::close() !!}
