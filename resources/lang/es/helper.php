@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'add' => 'Añadir'
+    'add' => 'añadir',
+    'transaction' => 'transacción'
 ];
