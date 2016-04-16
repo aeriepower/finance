@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('parent_id')->references('id')->on('category');
+            //$table->foreign('parent_id')->references('id')->on('category');
         });
     }
 

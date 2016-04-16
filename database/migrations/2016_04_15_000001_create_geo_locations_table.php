@@ -22,8 +22,8 @@ class CreateGeoLocationsTable extends Migration
             $table->integer('geo_category_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('parent_location_id')->references('id')->on('geo_location');
-            $table->foreign('geo_category_id')->references('id')->on('geo_category');
+            //$table->foreign('parent_location_id')->references('id')->on('geo_location');
+            //$table->foreign('geo_category_id')->references('id')->on('geo_category');
         });
     }
 

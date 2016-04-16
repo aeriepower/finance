@@ -20,14 +20,14 @@ class CreateTransactionsTable extends Migration
             $table->integer('account_balance');
             $table->dateTime('datetime');
             $table->boolean('billing');
-            $table->integer('user_id');
-            $table->integer('category_id');
-            $table->integer('provider_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('provider_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_id')->references('id')->on('user');
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('provider_id')->references('id')->on('provider');
+            //$table->foreign('user_id')->references('id')->on('user');
+            //$table->foreign('category_id')->references('id')->on('category');
+            //$table->foreign('provider_id')->references('id')->on('provider');
         });
     }
 

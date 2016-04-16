@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('geo_location_id')->references('id')->on('geo_location');
+            //$table->foreign('geo_location_id')->references('id')->on('geo_location');
         });
     }
 

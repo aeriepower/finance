@@ -22,7 +22,7 @@ class CreateProvidersTable extends Migration
             $table->integer('geo_location_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('geo_location_id')->references('id')->on('geo_location');
+            //$table->foreign('geo_location_id')->references('id')->on('geo_location');
         });
     }
 
