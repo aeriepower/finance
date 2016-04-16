@@ -10,6 +10,8 @@
                 <th data-field="price" data-sortable="true">Item Price</th>
             </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
 </div>
