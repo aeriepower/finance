@@ -4,5 +4,8 @@ return [
     'transaction-data' => 'Mas datos',
     'transaction-amount' => 'Importe',
     'transaction-category' => 'Categoría',
-    'transaction-save' => 'Guardar'
+    'transaction-save' => 'Guardar',
+    'login-email' => 'Email',
+    'login-password' => 'Contraseña',
+    'login-save' => 'Guardar'
 ];

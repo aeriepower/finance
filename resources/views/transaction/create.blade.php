@@ -9,7 +9,6 @@
     @include('layouts.elements.title')
     <div class="row">
         <div class="col-lg-12">
-            {!! Form::close() !!}
             <div class="col-md-6">
                 {!! Form::open(array('action' => 'TransactionController@store', 'method' => 'POST')) !!}
                 <div class="form-group">
@@ -27,9 +26,10 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('category', trans('form.transaction-category')) !!}
-                    {!! Form::select('category', array(), null, ['class' => 'form-control']) !!}
+                    {!! Form::select('category', array($asdf), null, ['class' => 'form-control']) !!}
                 </div>
                 {!! Form::submit(trans('form.transaction-save'),['class' => 'form-control btn-info']) !!}
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
