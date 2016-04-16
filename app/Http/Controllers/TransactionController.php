@@ -2,6 +2,7 @@
 
 namespace Finance\Http\Controllers;
 
+use Finance\Transaction;
 use Illuminate\Http\Request;
 
 use Finance\Http\Requests;
@@ -16,7 +17,8 @@ class TransactionController extends Controller
     public function index()
     {
         return view('transaction.index',[
-            'title' => 'Transaction'
+            'title' => 'Transaction',
+            'tableData' => Transaction::all()
         ]);
     }
 
