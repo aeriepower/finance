@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             {!! Form::close() !!}
             <div class="col-md-6">
-                {!! Form::open(array('action' => 'TransactionController@create', 'method' => 'POST')) !!}
+                {!! Form::open(array('action' => 'TransactionController@store', 'method' => 'POST')) !!}
                 <div class="form-group">
                     {!! Form::token() !!}
                     {!! Form::label('concept', trans('form.transaction-concept')) !!}
@@ -25,7 +25,11 @@
                     {!! Form::label('amount', trans('form.transaction-amount')) !!}
                     {!! Form::number('amount',null,['class' => 'form-control', 'placeholder' => trans('form.transaction-amount')]) !!}
                 </div>
-                {!! Form::select('category', array('1' => 1),['class' => 'form-control']) !!}
+                <div class="form-group">
+                    {!! Form::label('category', trans('form.transaction-category')) !!}
+                    {!! Form::select('category', array(), null, ['class' => 'form-control']) !!}
+                </div>
+                {!! Form::submit(trans('form.transaction-save'),['class' => 'form-control btn-info']) !!}
             </div>
         </div>
     </div>
