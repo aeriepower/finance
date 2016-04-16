@@ -16,7 +16,7 @@
                 data-sort-order="desc">
             <thead>
             <tr>
-                @if(!empty($tableData))
+                @if(!empty($tableData[0]))
                     @foreach($tableData[0]->getAttributes() as $key => $value)
                         <th>{{ $key }}</th>
                     @endforeach
