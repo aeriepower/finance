@@ -8,5 +8,11 @@ return [
     'login-email' => 'Email',
     'login-password' => 'Password',
     'login-save' => 'Save',
-    'login-create' => 'Create account'
+    'login-create' => 'Create account',
+    'newuser-name' => 'Name',
+    'newuser-surname' => 'Surname',
+    'newuser-email' => 'Email',
+    'newuser-password' => 'Password',
+    'newuser-repeat' => 'Repeat password',
+    'newuser-save' => 'Save user'
 ];

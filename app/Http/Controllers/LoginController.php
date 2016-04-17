@@ -47,7 +47,7 @@ class LoginController extends Controller
             return Redirect::to('/');
         } else {
             Session::flash('msg-error', trans('helper.login-incorrect'));
-            return Redirect::to('loggin');
+            return Redirect::to('login');
         }
     }
 
