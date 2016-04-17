@@ -21,7 +21,7 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading">New User</div>
             <div class="panel-body">
-                {!! Form::open(array('action' => 'LoginController@store', 'method' => 'POST')) !!}
+                {!! Form::open(array('action' => 'UserController@store', 'method' => 'POST')) !!}
                 {!! Form::token() !!}
                 <div class="form-group">
                     <div class="row">

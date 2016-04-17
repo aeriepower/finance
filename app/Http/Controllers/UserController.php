@@ -2,6 +2,8 @@
 
 namespace Finance\Http\Controllers;
 
+use Session;
+use Redirect;
 use Illuminate\Http\Request;
 
 use Finance\Http\Requests;
@@ -36,7 +38,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request['password'] != $request['repeat']){
+           Session::flash('msg-error', trans('form.newuser-passworddoesntmach'));
+           return Redirect::to('login');
+        }
+
+        $values = array(
+            'name' => $request['name'],
+            'surname' => $request['surname'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'email' => $request['email'],
+            'language' => 'ES',
+        );
+
+        if (!empty($request['campaign'])){
+            $values['campaign']  = $request['campaign'];
+        }
+        if (!empty($request['medium'])){
+            $values['medium']  = $request['medium'];
+        }
+        if (!empty($request['source'])){
+            $values['source']  = $request['source'];
+        }
+
+        \Finance\User::create($values);
+
+        Session::flash('msg-success', trans('form.newuser-checkemail'));
+        return Redirect::to('login');
     }
 
     /**
