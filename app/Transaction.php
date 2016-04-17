@@ -17,6 +17,19 @@ class Transaction extends Model
         'billing'
     );
 
+
+    protected $fillable = array(
+        'concept',
+        'data',
+        'amount',
+        'account_balance',
+        'datetime',
+        'billing',
+        'user_id',
+        'category_id',
+        'provider_id'
+    );
+
     /**
      * Give array list of specific attributes
      *

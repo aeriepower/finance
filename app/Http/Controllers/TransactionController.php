@@ -4,7 +4,7 @@ namespace Finance\Http\Controllers;
 
 use Finance\Transaction;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use Finance\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
