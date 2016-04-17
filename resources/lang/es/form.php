@@ -7,5 +7,6 @@ return [
     'transaction-save' => 'Guardar',
     'login-email' => 'Email',
     'login-password' => 'Contraseña',
-    'login-save' => 'Guardar'
+    'login-save' => 'Guardar',
+    'login-create' => 'Crear cuenta'
 ];

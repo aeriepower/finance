@@ -14,4 +14,5 @@
 
 Route::get('/','ReportController@index');
 Route::resource('transactions','TransactionController');
+Route::resource('user','UserController');
 Route::resource('login','LoginController');
