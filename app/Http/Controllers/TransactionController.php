@@ -56,7 +56,17 @@ class TransactionController extends Controller
 
         $userId = Auth::user()->id;
 
-        $account_balance = DB::table('transaction')->where('id', '=', $userId)->sum('amount') + $request['amount'];
+        $lastTransaction = Transaction::where('user_id',$userId)
+            ->orderBy('id','desc')
+            ->take(1)
+            ->get();
+
+
+        if(isset($lastTransaction[0])){
+            $account_balance = $lastTransaction[0]->account_balance + $request['amount'];
+        } else {
+            $account_balance = $request['amount'];
+        }
 
         $values = array(
             'concept' => $request['concept'],
