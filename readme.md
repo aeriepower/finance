@@ -3,7 +3,7 @@
 By David Hurtado
 [![LinkedIn](https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/linkedin-32.png)](https://es.linkedin.com/in/davidhurtadobanda)
 [![Facebook](https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/facebook-32.png)](https://www.facebook.com/HurtadoBandaDavid)
-[![Facebook](https://www.iconfinder.com/icons/683981/connection_github_network_share_social_square_icon#size=128)](https://github.com/aeriepower/)
+[![Facebook](https://cdn4.iconfinder.com/data/icons/bettericons/354/github-square-128.png)](https://github.com/aeriepower/)
 
 This is a small app to save the banking movements, an lately filter them by category and view them more easily in graphs.
 
