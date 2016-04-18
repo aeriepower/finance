@@ -1,4 +1,4 @@
-## myFinance Project
+## Finance Project
 
 By David Hurtado
 [![LinkedIn](https://cdn0.iconfinder.com/data/icons/social-flat-rounded-rects/512/linkedin-32.png)](https://es.linkedin.com/in/davidhurtadobanda)
