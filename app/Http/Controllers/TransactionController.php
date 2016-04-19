@@ -57,11 +57,6 @@ class TransactionController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $lastTransaction = Transaction::where('user_id', $userId)
-            ->orderBy('id', 'desc')
-            ->take(1)
-            ->get();
-
         if ($request->hasFile('file')) {
             if ($request->file('file')->isValid()) {
                 $destinationPath = 'resources/upload/transaction';
@@ -78,6 +73,11 @@ class TransactionController extends Controller
                 return redirect('/transactions');
             }
         }
+
+        $lastTransaction = Transaction::where('user_id', $userId)
+            ->orderBy('id', 'desc')
+            ->take(1)
+            ->get();
 
 
         if (isset($lastTransaction[0])) {
@@ -154,6 +154,23 @@ class TransactionController extends Controller
      * @param $file
      */
     public function importTransactionsFromCSV($file){
-        $csv = array_map('str_getcsv', file($file));
+        $csv_content = array_reverse(array_map('str_getcsv', file($file)));
+
+        foreach ($csv_content as $row){
+            $amount = str_replace('.', '', $row[4]);
+            $accountBalance = str_replace('.', '', $row[5]);
+            $values = array(
+                'concept' => $row[0],
+                'data' => $row[3],
+                'amount' => (int)$amount,
+                'account_balance' => (int)$accountBalance,
+                'datetime' => date('Y-m-d H:i:s', strtotime($row[2])),
+                'billing' => (int)$row[4] > 0 ? 0 : 1,
+                'user_id' => Auth::user()->id,
+                'category_id' => null,
+                'provider_id' => null
+            );
+            \Finance\Transaction::create($values);
+        }
     }
 }
