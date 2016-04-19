@@ -57,28 +57,30 @@ class TransactionController extends Controller
     {
         $userId = Auth::user()->id;
 
-        if ($request->hasFile('file')){
+        $lastTransaction = Transaction::where('user_id', $userId)
+            ->orderBy('id', 'desc')
+            ->take(1)
+            ->get();
+
+        if ($request->hasFile('file')) {
             if ($request->file('file')->isValid()) {
                 $destinationPath = 'resources/upload/transaction';
                 $extension = strtolower($request->file('file')->getClientOriginalExtension());
-                $fileName = $userId . ' - ' . rand(11111,99999).'.'.$extension;
+                $fileName = $userId . '-' . rand(11111, 99999) . '.' . $extension;
                 $request->file('file')->move($destinationPath, $fileName);
+
+                $this->importTransactionsFromCSV($destinationPath . '/' . $fileName);
+
                 Session::flash('success', 'Upload successfully');
                 return redirect('/transactions');
-            }
-        else {
+            } else {
                 Session::flash('error', 'uploaded file is not valid');
                 return redirect('/transactions');
             }
         }
 
-        $lastTransaction = Transaction::where('user_id',$userId)
-            ->orderBy('id','desc')
-            ->take(1)
-            ->get();
 
-
-        if(isset($lastTransaction[0])){
+        if (isset($lastTransaction[0])) {
             $account_balance = $lastTransaction[0]->account_balance + $request['amount'];
         } else {
             $account_balance = $request['amount'];
@@ -90,7 +92,7 @@ class TransactionController extends Controller
             'amount' => $request['amount'],
             'account_balance' => $account_balance,
             'datetime' => date('Y-m-d H:i:s'),
-            'billing' => $request['amount']>0?0:1,
+            'billing' => $request['amount'] > 0 ? 0 : 1,
             'user_id' => $userId,
             'category_id' => $request['category'],
             'provider_id' => null
@@ -98,7 +100,7 @@ class TransactionController extends Controller
 
         \Finance\Transaction::create($values);
 
-        return redirect('/transactions')->with('message','store');
+        return redirect('/transactions')->with('message', 'store');
     }
 
     /**
@@ -144,5 +146,14 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Read a CSV file and import each record to the transaction database
+     *
+     * @param $file
+     */
+    public function importTransactionsFromCSV($file){
+        $csv = array_map('str_getcsv', file($file));
     }
 }
