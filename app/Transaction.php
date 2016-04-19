@@ -13,8 +13,7 @@ class Transaction extends Model
         'data',
         'amount',
         'account_balance',
-        'datetime',
-        'billing'
+        'datetime'
     );
 
 

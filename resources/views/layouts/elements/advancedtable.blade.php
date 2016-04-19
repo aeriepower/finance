@@ -15,7 +15,7 @@
             <tr>
                 @if(!empty($tableData[0]))
                     @foreach($tableData[0]->getAttributes() as $key => $value)
-                        <th>{{ $key }}</th>
+                        <th>{{ ucfirst(trans('advancedtable.' . $key)) }}</th>
                     @endforeach
                 @endif
             </tr>
