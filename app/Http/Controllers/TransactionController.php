@@ -164,7 +164,7 @@ class TransactionController extends Controller
                 'data' => $row[3],
                 'amount' => (int)$amount,
                 'account_balance' => (int)$accountBalance,
-                'datetime' => date('Y-m-d H:i:s', strtotime($row[2])),
+                'datetime' => date('Y-m-d', strtotime(str_replace('/', '-', $row[2]))),
                 'billing' => (int)$row[4] > 0 ? 0 : 1,
                 'user_id' => Auth::user()->id,
                 'category_id' => null,
