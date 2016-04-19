@@ -55,24 +55,22 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = Auth::user()->id;
 
         if ($request->hasFile('file')){
             if ($request->file('file')->isValid()) {
                 $destinationPath = 'resources/upload/transaction';
                 $extension = strtolower($request->file('file')->getClientOriginalExtension());
-                $fileName = rand(11111,99999).'.'.$extension;
+                $fileName = $userId . ' - ' . rand(11111,99999).'.'.$extension;
                 $request->file('file')->move($destinationPath, $fileName);
                 Session::flash('success', 'Upload successfully');
                 return redirect('/transactions');
             }
-            else {
+        else {
                 Session::flash('error', 'uploaded file is not valid');
                 return redirect('/transactions');
             }
         }
-
-
-        $userId = Auth::user()->id;
 
         $lastTransaction = Transaction::where('user_id',$userId)
             ->orderBy('id','desc')
