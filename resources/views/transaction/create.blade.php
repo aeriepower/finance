@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="col-md-6">
-                {!! Form::open(array('action' => 'TransactionController@store', 'method' => 'POST')) !!}
+                {!! Form::open(array('action' => 'TransactionController@store', 'method' => 'POST', 'files' => true)) !!}
                 <div class="form-group">
                     {!! Form::token() !!}
                     {!! Form::label('concept', trans('form.transaction-concept')) !!}
@@ -27,6 +27,10 @@
                 <div class="form-group">
                     {!! Form::label('category', trans('form.transaction-category')) !!}
                     {!! Form::select('category', array(), null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('file', trans('form.transaction-category')) !!}
+                    {!! Form::file('file', ['class' => 'form-control']) !!}
                 </div>
                 {!! Form::submit(trans('form.transaction-save'),['class' => 'form-control btn-info']) !!}
                 {!! Form::close() !!}

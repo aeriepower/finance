@@ -2,6 +2,8 @@
 
 namespace Finance\Http\Controllers;
 
+use Session;
+use Redirect;
 use Finance\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +55,22 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->hasFile('file')){
+            if ($request->file('file')->isValid()) {
+                $destinationPath = 'resources/upload/transaction';
+                $extension = strtolower($request->file('file')->getClientOriginalExtension());
+                $fileName = rand(11111,99999).'.'.$extension;
+                $request->file('file')->move($destinationPath, $fileName);
+                Session::flash('success', 'Upload successfully');
+                return redirect('/transactions');
+            }
+            else {
+                Session::flash('error', 'uploaded file is not valid');
+                return redirect('/transactions');
+            }
+        }
+
 
         $userId = Auth::user()->id;
 
