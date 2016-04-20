@@ -18,3 +18,17 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+#CACHE
+
+# 1 SEMANA
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|ico|flv|woff|svg)$">
+Header set Cache-Control "max-age=604800, private, proxy-revalidate"
+</FilesMatch>
+# 2 DIAS
+<FilesMatch "\.(xml|txt|css|js)$">
+Header set Cache-Control "max-age=172800, proxy-revalidate"
+</FilesMatch>
+
+<FilesMatch "\.(pdf|csv)$">
+  header set x-robots-tag: noindex
+</FilesMatch>
