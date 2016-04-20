@@ -30,19 +30,38 @@ class TransactionController extends Controller
     public function index()
     {
 
-        $transactions = Transaction::take(20)->get();
+        $dateFrom = '2014-05-01';
+        $dateTo = '2015-05-30';
+
+        $transactions = Transaction::select(DB::raw('*'))
+            ->whereBetween('datetime', array($dateFrom, $dateTo))
+            ->orderBy('datetime', 'ASC')
+            ->get();
+
 
         $labels = array();
-        $line1 = array();
-        $line2 = array();
+        $line1 = array(); // Positivos
+        $line2 = array(); // Negativos
+
+        $date = $dateFrom;
+        $positive = 0;
+        $negative = 0;
 
         foreach ($transactions as $transaction) {
+
             $attributes = $transaction->getAttributes();
-            $labels[] = $attributes['datetime'];
+
             if($attributes['amount'] > 0){
-                $line1[] = $attributes['amount'];
+                $positive = $positive + ($attributes['amount']);
             } else {
-                $line2[] = $attributes['amount'] * -1;
+                $negative = $negative + ($attributes['amount'] * -1);
+            }
+
+            if(strtotime($date) < strtotime($attributes['datetime'])){
+                $labels[] = $date;
+                $line1[] = $positive;
+                $line2[] = $negative;
+                $date = $attributes['datetime'];
             }
         }
 
