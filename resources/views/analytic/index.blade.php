@@ -13,17 +13,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-4">Monthly cashflow overview</div>
+                        <div class="col-md-4">Cumulative cashflow overview</div>
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             {!! Form::open(array('action' => 'AnalyticController@index', 'method' => 'POST')) !!}
                             {!! Form::token() !!}
                             <div class="row">
                                 <div class="col-md-4">
-                                    {!! Form::text('dateFrom',null,['class' => 'form-control', 'id' => 'dateFrom','placeholder' => trans('form.login-email')]) !!}
+                                    {!! Form::text('dateFrom',$date['From'],['class' => 'form-control', 'id' => 'dateFrom' ]) !!}
                                 </div>
                                 <div class="col-md-4">
-                                    {!! Form::text('dateTo',null,['class' => 'form-control', 'id' => 'dateTo','placeholder' => trans('form.login-email')]) !!}
+                                    {!! Form::text('dateTo',$date['To'],['class' => 'form-control', 'id' => 'dateTo' ]) !!}
                                 </div>
                                 <div class="col-md-4">
                                     {!! Form::submit(trans('form.login-save'),['class' => 'form-control btn-info']) !!}

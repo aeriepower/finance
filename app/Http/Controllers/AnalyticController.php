@@ -51,6 +51,10 @@ class AnalyticController extends Controller
             'labels' => json_encode($labels),
             'line1' => json_encode($line1),
             'line2' => json_encode($line2),
+            'date' => array(
+                'From' => date('m/d/Y', strtotime($dateFrom)),
+                'To' => date('m/d/Y', strtotime($dateTo)),
+            )
         ]);
 
     }
