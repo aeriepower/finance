@@ -32,6 +32,10 @@ class TransactionController extends Controller
 
         $transactions = Transaction::take(20)->get();
 
+        $labels = array();
+        $line1 = array();
+        $line2 = array();
+
         foreach ($transactions as $transaction) {
             $attributes = $transaction->getAttributes();
             $labels[] = $attributes['datetime'];
