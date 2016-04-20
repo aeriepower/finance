@@ -9,9 +9,10 @@ use Finance\Http\Requests;
 
 class AnalyticController extends Controller
 {
-    public function index(Request $request){
-        $dateFrom = isset($request['dateFrom'])?date('Y-m-d', strtotime($request['dateFrom'])):'2016-01-01';
-        $dateTo = isset($request['dateTo'])?date('Y-m-d', strtotime($request['dateTo'])):'2016-01-31';
+    public function index(Request $request)
+    {
+        $dateFrom = isset($request['dateFrom']) ? date('Y-m-d', strtotime($request['dateFrom'])) : '2016-01-01';
+        $dateTo = isset($request['dateTo']) ? date('Y-m-d', strtotime($request['dateTo'])) : '2016-01-31';
 
 
         $transactions = Transaction::select(DB::raw('
@@ -32,14 +33,14 @@ class AnalyticController extends Controller
         $positive = 0;
         $negative = 0;
         foreach ($transactions as $transaction) {
-                $labels[] = DATE('d-m-Y',strtotime($transaction->datetime));
-                $positive = $positive + $transaction->positive;
-                $line1[] = $positive;
-                $negative = $negative + ($transaction->negative * -1);
-                $line2[] = $negative;
+            $labels[] = DATE('d-m-Y', strtotime($transaction->datetime));
+            $positive = $positive + $transaction->positive;
+            $line1[] = $positive;
+            $negative = $negative + ($transaction->negative * -1);
+            $line2[] = $negative;
         }
 
-        return view('analytic.index',[
+        return view('analytic.index', [
             'title' => trans('helper.transaction'),
             'labels' => json_encode($labels),
             'line1' => json_encode($line1),
