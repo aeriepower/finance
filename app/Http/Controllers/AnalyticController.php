@@ -14,8 +14,13 @@ class AnalyticController extends Controller
         $dateTo = isset($request['dateTo'])?date('Y-m-d', strtotime($request['dateTo'])):'2016-01-31';
 
 
-        $transactions = Transaction::select(DB::raw('*'))
+        $transactions = Transaction::select(DB::raw('
+            SUM(case when billing = 1 then amount else 0 end) as negative,
+            SUM(case when billing = 0 then amount else 0 end) as positive,
+            datetime
+        '))
             ->whereBetween('datetime', array($dateFrom, $dateTo))
+            ->groupBy(DB::raw('datetime'))
             ->orderBy('datetime', 'ASC')
             ->get();
 
@@ -24,26 +29,14 @@ class AnalyticController extends Controller
         $line1 = array(); // Positivos
         $line2 = array(); // Negativos
 
-        $date = $dateFrom;
         $positive = 0;
         $negative = 0;
-
         foreach ($transactions as $transaction) {
-
-            $attributes = $transaction->getAttributes();
-
-            if($attributes['amount'] > 0){
-                $positive = $positive + ($attributes['amount']);
-            } else {
-                $negative = $negative + ($attributes['amount'] * -1);
-            }
-
-            if(strtotime($date) < strtotime($attributes['datetime'])){
-                $labels[] = $date;
+                $labels[] = DATE('d-m-Y',strtotime($transaction->datetime));
+                $positive = $positive + $transaction->positive;
                 $line1[] = $positive;
+                $negative = $negative + ($transaction->negative * -1);
                 $line2[] = $negative;
-                $date = $attributes['datetime'];
-            }
         }
 
         return view('analytic.index',[

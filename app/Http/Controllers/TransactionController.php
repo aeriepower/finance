@@ -29,10 +29,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-
-
         $transactions = Transaction::select(DB::raw('*'))
-            ->whereBetween('datetime', array('2015-01-01', '2015-01-31'))
+            ->whereBetween('datetime', array('2016-01-01', '2016-01-31'))
             ->orderBy('datetime', 'ASC')
             ->get();
 
