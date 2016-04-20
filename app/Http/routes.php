@@ -16,3 +16,7 @@ Route::get('/','ReportController@index');
 Route::resource('transactions','TransactionController');
 Route::resource('user','UserController');
 Route::resource('login','LoginController');
+
+// Analytic controller
+Route::get('analysis', 'AnalyticController@index');
+Route::post('analysis', 'AnalyticController@index');

@@ -30,48 +30,16 @@ class TransactionController extends Controller
     public function index()
     {
 
-        $dateFrom = '2014-05-01';
-        $dateTo = '2015-05-30';
 
         $transactions = Transaction::select(DB::raw('*'))
-            ->whereBetween('datetime', array($dateFrom, $dateTo))
+            ->whereBetween('datetime', array('2015-01-01', '2015-01-31'))
             ->orderBy('datetime', 'ASC')
             ->get();
-
-
-        $labels = array();
-        $line1 = array(); // Positivos
-        $line2 = array(); // Negativos
-
-        $date = $dateFrom;
-        $positive = 0;
-        $negative = 0;
-
-        foreach ($transactions as $transaction) {
-
-            $attributes = $transaction->getAttributes();
-
-            if($attributes['amount'] > 0){
-                $positive = $positive + ($attributes['amount']);
-            } else {
-                $negative = $negative + ($attributes['amount'] * -1);
-            }
-
-            if(strtotime($date) < strtotime($attributes['datetime'])){
-                $labels[] = $date;
-                $line1[] = $positive;
-                $line2[] = $negative;
-                $date = $attributes['datetime'];
-            }
-        }
 
 
         return view('transaction.index',[
             'title' => trans('helper.transaction'),
             'tableData' => $transactions,
-            'labels' => json_encode($labels),
-            'line1' => json_encode($line1),
-            'line2' => json_encode($line2),
         ]);
     }
 
