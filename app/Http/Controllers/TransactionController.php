@@ -29,9 +29,26 @@ class TransactionController extends Controller
      */
     public function index()
     {
+
+        $transactions = Transaction::take(20)->get();
+
+        foreach ($transactions as $transaction) {
+            $attributes = $transaction->getAttributes();
+            $labels[] = $attributes['datetime'];
+            if($attributes['amount'] > 0){
+                $line1[] = $attributes['amount'];
+            } else {
+                $line2[] = $attributes['amount'] * -1;
+            }
+        }
+
+
         return view('transaction.index',[
             'title' => trans('helper.transaction'),
-            'tableData' => Transaction::all()
+            'tableData' => $transactions,
+            'labels' => json_encode($labels),
+            'line1' => json_encode($line1),
+            'line2' => json_encode($line2),
         ]);
     }
 

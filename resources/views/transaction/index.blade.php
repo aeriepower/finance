@@ -38,7 +38,7 @@
         var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 
         var dummy = {
-            labels : ["January","February","March","April","May","June","July"],
+            labels : {!! $labels !!},
             datasets : [
                 {
                     label: "My First dataset",
@@ -48,7 +48,7 @@
                     pointStrokeColor : "#fff",
                     pointHighlightFill : "#fff",
                     pointHighlightStroke : "rgba(220,220,220,1)",
-                    data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                    data : {!! $line1 !!}
                 },
                 {
                     label: "My Second dataset",
@@ -58,7 +58,7 @@
                     pointStrokeColor : "#fff",
                     pointHighlightFill : "#fff",
                     pointHighlightStroke : "rgba(48, 164, 255, 1)",
-                    data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                    data : {!! $line2 !!}
                 }
             ]
 
