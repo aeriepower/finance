@@ -19,7 +19,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('amount');
             $table->integer('account_balance');
             $table->dateTime('datetime');
-            $table->boolean('billing');
+            $table->boolean('billing')->default(0);
+            $table->boolean('reiterate')->default(0);
+            $table->boolean('exception')->default(0);
             $table->integer('user_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('provider_id')->nullable();
