@@ -9,11 +9,12 @@ class Transaction extends Model
     protected $table = 'transaction';
 
     protected $showFields = array(
+        'id',
         'concept',
         'data',
         'amount',
         'account_balance',
-        'datetime'
+        'datetime',
     );
 
 

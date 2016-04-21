@@ -5,4 +5,5 @@ return [
     'amount' => 'importe',
     'account_balance' => 'saldo',
     'datetime' => 'fecha',
+    'id' => 'id',
 ];

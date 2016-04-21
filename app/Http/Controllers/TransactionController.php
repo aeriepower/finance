@@ -31,7 +31,7 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::select(DB::raw('*'))
             ->whereBetween('datetime', array('2016-01-01', '2016-01-31'))
-            ->orderBy('datetime', 'ASC')
+            ->orderBy('datetime', 'Desc')
             ->get();
 
 
@@ -178,5 +178,19 @@ class TransactionController extends Controller
             );
             \Finance\Transaction::create($values);
         }
+    }
+
+    public function concept($concept)
+    {
+        $transactions = Transaction::select(DB::raw('*'))
+            ->where('concept', '=', $concept)
+            ->orderBy('datetime', 'Desc')
+            ->get();
+
+
+        return view('transaction.index',[
+            'title' => trans('helper.transaction'),
+            'tableData' => $transactions,
+        ]);
     }
 }

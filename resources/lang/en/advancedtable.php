@@ -5,4 +5,5 @@ return [
     'amount' => 'amount',
     'account_balance' => 'account balance',
     'datetime' => 'date',
+    'id' => 'id',
 ];
