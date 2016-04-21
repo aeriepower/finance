@@ -928,7 +928,7 @@ h1.page-header {
 	height: 65px;
 	overflow: scroll;
 }
-.table tr td:nth-child(3):after,
-.table tr td:nth-child(4):after{
+.table tr td:nth-child(4):after,
+.table tr td:nth-child(5):after{
 	content: ' €';
 }
