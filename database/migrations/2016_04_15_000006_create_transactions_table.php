@@ -19,7 +19,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('amount');
             $table->integer('account_balance');
             $table->dateTime('datetime');
-            $table->boolean('billing');
+            $table->boolean('billing')->comment = "Boolean 1 if is billig or 0 if not";
+            $table->boolean('recurrence')->nullable()->comment = "Bollean 1 if is recurring event";
+            $table->boolean('exception')->nullable()->comment = "Boolean 1 if don't want to show at analytics";
             $table->integer('user_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('provider_id')->nullable();
