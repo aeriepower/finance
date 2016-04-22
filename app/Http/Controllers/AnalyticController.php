@@ -52,4 +52,72 @@ class AnalyticController extends Controller
         ]);
 
     }
+
+    /**
+     * Get the average of the amount at the year
+     * 
+     * @param $userId
+     * @param $year
+     * @return mixed
+     */
+    public function getYearAmountAvg($userId, $year)
+    {
+        return DB::select(DB::raw("SELECT
+              avg(months.amount) AS anualAVG
+            FROM (
+                SELECT
+                    sum(amount) as amount
+                FROM
+                    transaction
+                WHERE
+                    user_id = :userId
+                AND
+                    exception = 0
+                AND
+                    recurrence = 0
+                AND
+                   billing = 1
+                AND
+                   YEAR(datetime) = :year
+                GROUP BY
+                   month(datetime)
+            ) as months;"), array(
+            'userId' => $userId,
+            'year' => $year,
+        ));
+    }
+
+    /**
+     * Get the average of the amount at last years same month
+     * 
+     * @param $userId
+     * @param $month
+     * @return mixed
+     */
+    public function getMonthAmountAvg($userId, $month)
+    {
+        return DB::select(DB::raw("SELECT
+              avg(years.amount) AS yearlyAVG
+            FROM (
+                SELECT
+                    sum(amount) AS amount,
+                    year(datetime)
+                FROM
+                    transaction
+                WHERE
+                    exception = 0
+                AND
+                    recurrence = 0
+                AND
+                    billing = 1
+                AND
+                    month(datetime) = :month
+                GROUP BY
+                  year(datetime)
+              ) as years
+            ) as months;"), array(
+            'userId' => $userId,
+            'month' => $month
+        ));
+    }
 }
