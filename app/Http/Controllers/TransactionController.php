@@ -128,7 +128,10 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('transaction.update',[
+            'title' => trans('helper.transaction'),
+            'transaction' => Transaction::find($id)
+        ]);
     }
 
     /**
