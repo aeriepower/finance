@@ -5,7 +5,7 @@
                 <svg class="glyph stroked {!! $icon !!}"><use xlink:href="#stroked-bag"></use></svg>
             </div>
             <div class="col-sm-9 col-lg-7 widget-right">
-                <div class="large">{!! $title !!}</div>
+                <input type="text" class="form-control large" value="{!! $value !!}" style="border: 0" name="{!! $inputName !!}">
                 <div class="text-muted">{!! $subtitle !!}</div>
             </div>
         </div>

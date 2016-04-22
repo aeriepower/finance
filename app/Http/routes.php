@@ -20,3 +20,4 @@ Route::resource('login','LoginController');
 // Analytic controller
 Route::get('analysis', 'AnalyticController@index');
 Route::post('analysis', 'AnalyticController@index');
+Route::get('transaction/concept/{concept}',['as' => 'concept', 'uses' => 'TransactionController@concept']);
