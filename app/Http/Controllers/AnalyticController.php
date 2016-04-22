@@ -60,7 +60,7 @@ class AnalyticController extends Controller
      * @param $year
      * @return mixed
      */
-    public function getYearAmountAvg($userId, $year)
+    protected function getYearAmountAvg($userId, $year)
     {
         return DB::select(DB::raw("SELECT
               avg(months.amount) AS anualAVG
@@ -89,12 +89,12 @@ class AnalyticController extends Controller
 
     /**
      * Get the average of the amount at last years same month
-     * 
+     *
      * @param $userId
      * @param $month
      * @return mixed
      */
-    public function getMonthAmountAvg($userId, $month)
+    protected function getMonthAmountAvg($userId, $month)
     {
         return DB::select(DB::raw("SELECT
               avg(years.amount) AS yearlyAVG
