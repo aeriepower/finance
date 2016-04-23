@@ -43,26 +43,9 @@ class UserController extends Controller
            return Redirect::to('login');
         }
 
-        $values = array(
-            'name' => $request['name'],
-            'surname' => $request['surname'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'email' => $request['email'],
-            'language' => 'ES',
-        );
+        $request['password'] = bcrypt($request['password']);
 
-        if (!empty($request['campaign'])){
-            $values['campaign']  = $request['campaign'];
-        }
-        if (!empty($request['medium'])){
-            $values['medium']  = $request['medium'];
-        }
-        if (!empty($request['source'])){
-            $values['source']  = $request['source'];
-        }
-
-        \Finance\User::create($values);
+        \Finance\User::create($request->all());
 
         Session::flash('msg-success', trans('form.newuser-checkemail'));
         return Redirect::to('login');
