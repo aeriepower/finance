@@ -27,7 +27,9 @@ class Transaction extends Model
         'billing',
         'user_id',
         'category_id',
-        'provider_id'
+        'provider_id',
+        'reiterate',
+        'exception',
     );
 
     /**

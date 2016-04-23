@@ -932,3 +932,25 @@ h1.page-header {
 .table tr td:nth-child(5):after{
 	content: ' €';
 }
+.lumio-radio {
+	display: none;
+}
+.lumio-radio + label {
+    -webkit-appearance: none;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    padding: 5px 15px;
+    font-size: 20px;
+    color: #FFF;
+}
+.lumio-radio:checked + label {
+	box-shadow: 0 0 0 4px #AFAFAF;
+}
+.bg-red {
+	background-color: #f9243f;
+}
+.bg-teal {
+	background-color: #1ebfae;
+}

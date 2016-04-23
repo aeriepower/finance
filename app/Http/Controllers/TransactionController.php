@@ -129,10 +129,29 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        return view('transaction.update',[
+        $categories = Category::where('id', '<', 9)->get();
+
+        $allCategories = array();
+
+        foreach ($categories as $category) {
+            $subCategories = Category::where('parent_id', '=', $category->id)->get();
+
+            $subCategoryContainer = array();
+
+            foreach ($subCategories as $subCategory) {
+                $subCategoryContainer[] = array(
+                    'id' => $subCategory->id,
+                    'name_es' => $subCategory->name_es
+                );
+            }
+
+            $allCategories[$category->name_es] = $subCategoryContainer;
+        }
+
+        return view('transaction.update', [
             'title' => trans('helper.transaction'),
             'transaction' => Transaction::find($id),
-            'categories' => Category::all()
+            'categories' => $allCategories
         ]);
     }
 
@@ -145,6 +164,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $transaction = Transaction::find($id);
         $transaction->fill($request->all());
         $transaction->save();
