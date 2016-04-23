@@ -2,6 +2,7 @@
 
 namespace Finance\Http\Controllers;
 
+use Finance\Category;
 use Session;
 use Redirect;
 use Finance\Transaction;
@@ -130,7 +131,8 @@ class TransactionController extends Controller
     {
         return view('transaction.update',[
             'title' => trans('helper.transaction'),
-            'transaction' => Transaction::find($id)
+            'transaction' => Transaction::find($id),
+            'categories' => Category::all()
         ]);
     }
 
@@ -143,7 +145,11 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $transaction = Transaction::find($id);
+        $transaction->fill($request->all());
+        $transaction->save();
+
+        return redirect('/transactions')->with('message', 'updated');
     }
 
     /**
