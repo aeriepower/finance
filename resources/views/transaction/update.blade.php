@@ -21,7 +21,7 @@
                     <div class="col-sm-9 col-lg-9 widget-right">
                         {!! Form::text('amount',$transaction->amount,['class' => 'form-control large',
                         'placeholder' => trans('form.transaction-data')]) !!}
-                        <div class="text-muted">Importe</div>
+                        <div class="text-muted">{!! Date('Y-m-d',strtotime($transaction->datetime)) !!}</div>
                     </div>
                 </div>
             </div>
