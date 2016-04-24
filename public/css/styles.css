@@ -954,3 +954,6 @@ h1.page-header {
 .bg-teal {
 	background-color: #1ebfae;
 }
+.notice {
+    margin-right: 15px;
+}

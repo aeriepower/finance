@@ -169,6 +169,14 @@ class TransactionController extends Controller
         $transaction->fill($request->all());
         $transaction->save();
 
+        $allUncategorized = Transaction::where('concept', '=', $request['concept'])->get();
+
+        foreach($allUncategorized as $uncategorized) {
+            $uncategorized->category_id = $transaction->category_id;
+            $uncategorized->data = $transaction->data;
+            $uncategorized->save();
+        }
+
         return redirect('/transactions')->with('message', 'updated');
     }
 
@@ -209,11 +217,32 @@ class TransactionController extends Controller
         }
     }
 
+    /**
+     * Return a list of transactions with the same "concept" than received
+     *
+     * @param string $concept
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function concept($concept)
     {
         $transactions = Transaction::select(DB::raw('*'))
             ->where('concept', '=', $concept)
             ->orderBy('datetime', 'Desc')
+            ->get();
+
+
+        return view('transaction.index',[
+            'title' => trans('helper.transaction'),
+            'tableData' => $transactions,
+        ]);
+    }
+
+    public function notice()
+    {
+        $transactions = Transaction::select(DB::raw('*'))
+            ->where('category_id', '=', null)
+            ->groupBy('concept')
+            ->orderBy('datetime','desc')
             ->get();
 
 

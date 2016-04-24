@@ -21,3 +21,4 @@ Route::resource('login','LoginController');
 Route::get('analysis', 'AnalyticController@index');
 Route::post('analysis', 'AnalyticController@index');
 Route::get('transaction/concept/{concept}',['as' => 'concept', 'uses' => 'TransactionController@concept']);
+Route::get('transaction/notice/',['as' => 'notice', 'uses' => 'TransactionController@notice']);
