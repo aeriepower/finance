@@ -955,5 +955,9 @@ h1.page-header {
 	background-color: #1ebfae;
 }
 .notice {
-    margin-right: 15px;
+	margin-right: 15px;
+}
+.notice span{
+	font-size: 16px;
+	line-height: 1.6;
 }

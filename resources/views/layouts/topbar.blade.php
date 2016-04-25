@@ -9,7 +9,7 @@
             </button>
             <a class="navbar-brand" href="#"><span>my</span>Finance</a>
             <ul class="user-menu">
-                <a href="{!! route('notice') !!}" class="notice"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                <a href="{!! route('notice') !!}" class="notice"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a>
                 <li class="dropdown pull-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {!! trans('topbar.user') !!}
