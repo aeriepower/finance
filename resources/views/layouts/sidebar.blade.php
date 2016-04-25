@@ -2,7 +2,7 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <form role="search">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="{!! trans('topbar.search') !!}">
+            <input type="text" class="form-control" placeholder="{{ trans('topbar.search') }}">
         </div>
     </form>
     <ul class="nav menu">

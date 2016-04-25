@@ -21,7 +21,7 @@
                     <div class="col-sm-9 col-lg-9 widget-right">
                         {!! Form::text('amount',$transaction->amount,['class' => 'form-control large',
                         'placeholder' => trans('form.transaction-data')]) !!}
-                        <div class="text-muted">{!! Date('Y-m-d',strtotime($transaction->datetime)) !!}</div>
+                        <div class="text-muted">{{ Date('Y-m-d',strtotime($transaction->datetime)) }}</div>
                     </div>
                 </div>
             </div>
@@ -58,13 +58,13 @@
                     <ul class="todo-list">
                         <select name="category_id" id="category_id" class="form-control">
                             @foreach($categories as $category => $subCategories)
-                                <optgroup label="{!! $category !!}">
+                                <optgroup label="{{ $category }}">
                                     @foreach($subCategories as $subCategory)
                                         <option
                                             @if($transaction->category_id == $subCategory['id'])
                                                 selected
                                             @endif
-                                        value="{!! $subCategory['id'] !!}">{!! $subCategory['name_es'] !!}</option>
+                                        value="{{ $subCategory['id'] }}">{{ $subCategory['name_es'] }}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach
