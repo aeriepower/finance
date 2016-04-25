@@ -270,6 +270,7 @@ class TransactionController extends Controller
                 ($key + 1 == count($categories) || $categoryName != $category->categoryName)
             ){
                 $allCategories[$categoryName] = $subCategory;
+                unset($subCategory);
             }
 
             $categoryName = $category->categoryName;
