@@ -129,29 +129,12 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::where('id', '<', 9)->get();
-
-        $allCategories = array();
-
-        foreach ($categories as $category) {
-            $subCategories = Category::where('parent_id', '=', $category->id)->get();
-
-            $subCategoryContainer = array();
-
-            foreach ($subCategories as $subCategory) {
-                $subCategoryContainer[] = array(
-                    'id' => $subCategory->id,
-                    'name_es' => $subCategory->name_es
-                );
-            }
-
-            $allCategories[$category->name_es] = $subCategoryContainer;
-        }
+        $categories = $this->getGroupedCategories();
 
         return view('transaction.update', [
             'title' => trans('helper.transaction'),
             'transaction' => Transaction::find($id),
-            'categories' => $allCategories
+            'categories' => $categories
         ]);
     }
 
@@ -237,6 +220,11 @@ class TransactionController extends Controller
         ]);
     }
 
+    /**
+     * Return a list of transactions without category
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function notice()
     {
         $transactions = Transaction::select(DB::raw('*'))
@@ -250,5 +238,43 @@ class TransactionController extends Controller
             'title' => trans('helper.transaction'),
             'tableData' => $transactions,
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getGroupedCategories() {
+
+        $categories = Category::join('category as sub','category.id', '=', 'sub.parent_id')
+            ->get(
+                array(
+                    'category.name_es as categoryName',
+                    'sub.name_es as subCategoryName',
+                    'sub.id as subCategoryId'
+                )
+            );
+
+
+        $allCategories = array();
+
+
+        foreach ($categories as $key => $category){
+
+            $subCategory[] = array(
+                'id' => $category->subCategoryId,
+                'name_es' => $category->subCategoryName,
+            );
+
+            if(
+                (isset($categoryName) && $categoryName != $category->categoryName)
+                || $key + 1 == count($categories)
+            ){
+                $allCategories[$categoryName] = $subCategory;
+            }
+
+            $categoryName = $category->categoryName;
+        }
+
+        return $allCategories;
     }
 }
