@@ -266,8 +266,8 @@ class TransactionController extends Controller
             );
 
             if(
-                (isset($categoryName) && $categoryName != $category->categoryName)
-                || $key + 1 == count($categories)
+                isset($categoryName) &&
+                ($key + 1 == count($categories) || $categoryName != $category->categoryName)
             ){
                 $allCategories[$categoryName] = $subCategory;
             }
