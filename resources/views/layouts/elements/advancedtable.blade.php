@@ -26,7 +26,7 @@
                         @foreach($element->getAttributes() as $key => $value)
                             <td>
                                 @if($key == 'id')
-                                    <a href="{!! route('transactions.edit', $value) !!}" class="btn btn-info">
+                                    <a href="{!! route(trans('routes.transactions') . '.edit', $value) !!}" class="btn btn-info">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </a>
                                 @elseif($key == 'concept')

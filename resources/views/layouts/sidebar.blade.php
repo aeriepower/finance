@@ -11,7 +11,7 @@
         ?>
         @foreach ($sidebarElements as $key => $value)
             <li>
-                <a href="{{ URL::to($key) }}">
+                <a href="{{ URL::to(trans('routes.' . $key)) }}">
                     <svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
                     {{ ucfirst($value) }}
                 </a>

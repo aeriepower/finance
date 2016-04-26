@@ -1,7 +1,7 @@
 <?php
 
 return [
-    '/' => 'dashboard',
+    'home' => 'dashboard',
     'transactions' => 'transactions',
     'analysis' => 'analysis',
 ];

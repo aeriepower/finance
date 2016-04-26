@@ -12,13 +12,13 @@
 */
 
 
-Route::get('/','ReportController@index');
-Route::resource('transactions','TransactionController');
-Route::resource('user','UserController');
-Route::resource('login','LoginController');
+Route::get(trans('routes.home'),'ReportController@index');
+Route::resource(trans('routes.transactions'),'TransactionController');
+Route::resource(trans('routes.user'),'UserController');
+Route::resource(trans('routes.login'),'LoginController');
 
 // Analytic controller
-Route::get('analysis', 'AnalyticController@index');
-Route::post('analysis', 'AnalyticController@index');
-Route::get('transaction/concept/{concept}',['as' => 'concept', 'uses' => 'TransactionController@concept']);
-Route::get('transaction/notice/',['as' => 'notice', 'uses' => 'TransactionController@notice']);
+Route::get(trans('routes.analysis'), 'AnalyticController@index');
+Route::post(trans('routes.analysis'), 'AnalyticController@index');
+Route::get(trans('concept'),['as' => 'concept', 'uses' => 'TransactionController@concept']);
+Route::get(trans('notice'),['as' => 'notice', 'uses' => 'TransactionController@notice']);

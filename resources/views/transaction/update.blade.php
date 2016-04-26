@@ -7,7 +7,7 @@
 @section('content')
 
     @include('layouts.elements.title')
-    {!! Form::model($transaction,['route' => ['transactions.update', $transaction->id], 'method' => 'PUT']) !!}
+    {!! Form::model($transaction,['route' => [trans('routes.transactions') . '.update', $transaction->id], 'method' => 'PUT']) !!}
     {!! Form::token() !!}
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-3">
