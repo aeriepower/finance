@@ -22,7 +22,10 @@ class User extends Authenticatable
         'language',
         'campaign',
         'medium',
-        'source'
+        'source',
+        'birthdate',
+        'gender',
+        'geo_location_id'
     ];
 
     /**
@@ -33,4 +36,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function geoLocation()
+    {
+        return $this->belongsTo(GeoLocation::class);
+    }
+
 }

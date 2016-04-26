@@ -33,6 +33,22 @@ class Transaction extends Model
     );
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
+
+    /**
      * Give array list of specific attributes
      *
      * @return array
