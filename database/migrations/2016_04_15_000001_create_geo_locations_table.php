@@ -18,8 +18,8 @@ class CreateGeoLocationsTable extends Migration
             $table->string('name_en');
             $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);
-            $table->integer('parent_location_id');
-            $table->integer('geo_category_id');
+            $table->integer('parent_location_id')->index();
+            $table->integer('geo_category_id')->index();
             $table->timestamps();
             $table->softDeletes();
             //$table->foreign('parent_location_id')->references('id')->on('geo_location');

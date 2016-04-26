@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name_en');
             $table->string('name_es');
-            $table->integer('parent_id')->nullable();
+            $table->integer('parent_id')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
             //$table->foreign('parent_id')->references('id')->on('category');

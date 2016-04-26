@@ -22,9 +22,9 @@ class CreateTransactionsTable extends Migration
             $table->boolean('billing')->default(0);
             $table->boolean('reiterate')->default(0);
             $table->boolean('exception')->default(0);
-            $table->integer('user_id')->nullable();
-            $table->integer('category_id')->nullable();
-            $table->integer('provider_id')->nullable();
+            $table->integer('user_id')->nullable()->index();
+            $table->integer('category_id')->nullable()->index();
+            $table->integer('provider_id')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
             //$table->foreign('user_id')->references('id')->on('user');

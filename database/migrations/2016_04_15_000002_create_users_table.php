@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('confirmed_at')->nullable();
             $table->date('birthdate')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
-            $table->integer('geo_location_id')->nullable();
+            $table->integer('geo_location_id')->nullable()->index();
             $table->string('campaign')->nullable();
             $table->string('medium')->nullable();
             $table->string('source')->nullable();
