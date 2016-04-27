@@ -12,7 +12,13 @@ class ConceptCategory extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('concept_category', function (Blueprint $table) {
+            $table->string('concept');
+            $table->primary('concept');
+            $table->integer('category_id')->index();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,11 +28,6 @@ class ConceptCategory extends Migration
      */
     public function down()
     {
-        Schema::create('concept_category', function (Blueprint $table) {
-            $table->primary('concept');
-            $table->integer('category_id')->index();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::drop('concept_category');
     }
 }
