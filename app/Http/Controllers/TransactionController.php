@@ -3,6 +3,7 @@
 namespace Finance\Http\Controllers;
 
 use Finance\Category;
+use Illuminate\Support\Facades\Cache;
 use Session;
 use Redirect;
 use Finance\Transaction;
@@ -180,7 +181,10 @@ class TransactionController extends Controller
      * @param $file
      */
     public function importTransactionsFromCSV($file){
-        $categoryConcepts = DB::table('concept_category')->get(array('concept','category_id'));
+
+        $categoryConcepts = Cache::remember('concept_category', 30, function(){
+            return DB::table('concept_category')->get(array('concept','category_id'));
+        });
 
         $relations = array();
 
