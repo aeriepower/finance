@@ -180,6 +180,14 @@ class TransactionController extends Controller
      * @param $file
      */
     public function importTransactionsFromCSV($file){
+        $categoryConcepts = DB::table('concept_category')->get(array('concept','category_id'));
+
+        $relations = array();
+
+        foreach ($categoryConcepts as $relation){
+            $relations[$relation['concept']] = $relation['category_id'];
+        }
+
         $csv_content = array_reverse(array_map('str_getcsv', file($file)));
 
         foreach ($csv_content as $row){
@@ -193,7 +201,7 @@ class TransactionController extends Controller
                 'datetime' => date('Y-m-d', strtotime(str_replace('/', '-', $row[2]))),
                 'billing' => (int)$row[4] > 0 ? 0 : 1,
                 'user_id' => Auth::user()->id,
-                'category_id' => null,
+                'category_id' => isset($relations[$row[0]])?$relations[$row[0]]:null,
                 'provider_id' => null
             );
             \Finance\Transaction::create($values);
