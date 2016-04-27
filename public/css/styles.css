@@ -960,7 +960,6 @@ h1.page-header {
 .notice span{
 	font-size: 16px;
 	line-height: 1.6;
-	color: #ff9900;
 	transition-duration: 225ms;
 }
 .notice:hover span{
