@@ -6,6 +6,7 @@ ini_set('xdebug.max_nesting_level', 3000);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <title>Lumino - Dashboard</title>
 
     {!!Html::style('css/bootstrap.min.css')!!}

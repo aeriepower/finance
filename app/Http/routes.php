@@ -20,5 +20,5 @@ Route::resource(trans('routes.login'),'LoginController');
 // Analytic controller
 Route::get(trans('routes.analysis'), 'AnalyticController@index');
 Route::post(trans('routes.analysis'), 'AnalyticController@index');
-Route::get(trans('concept'),['as' => 'concept', 'uses' => 'TransactionController@concept']);
-Route::get(trans('notice'),['as' => 'notice', 'uses' => 'TransactionController@notice']);
+Route::get(trans('routes.concept'),'TransactionController@concept')->name('concept');
+Route::get(trans('routes.notice'),'TransactionController@notice')->name('notice');
