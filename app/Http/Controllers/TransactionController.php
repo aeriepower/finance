@@ -241,6 +241,7 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::select(DB::raw('*'))
             ->where('category_id', '=', null)
+            ->where('user_id', '=', Auth::user()->id)
             ->groupBy('concept')
             ->orderBy('datetime','desc')
             ->get();
