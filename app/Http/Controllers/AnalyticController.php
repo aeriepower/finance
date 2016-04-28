@@ -33,7 +33,7 @@ class AnalyticController extends Controller
         $positive = 0;
         $negative = 0;
         foreach ($transactions as $transaction) {
-            $labels[] = DATE('d-m-Y', strtotime($transaction->datetime));
+            $labels[] = DATE('d-m', strtotime($transaction->datetime));
             $positive = $positive + $transaction->positive;
             $line1[] = $positive;
             $negative = $negative + ($transaction->negative * -1);
