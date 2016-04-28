@@ -8,4 +8,5 @@ return [
     'analysis' => 'analisis',
     'concept' => 'transaccion/concepto/{concept}',
     'notice' => 'transaccion/alerta/',
+    'createUser' => 'usuario/create'
 ];

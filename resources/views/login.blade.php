@@ -33,7 +33,7 @@
                     {!! Form::submit(trans('form.login-save'),['class' => 'form-control btn-info']) !!}
                 {!! Form::close() !!}
                 <br>
-                <a href="{{url('user/create')}}">{{ trans('form.login-create') }}</a>
+                <a href="{{url(trans('routes.createUser'))}}">{{ trans('form.login-create') }}</a>
             </div>
         </div>
     </div><!-- /.col-->

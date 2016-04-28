@@ -79,10 +79,10 @@ class TransactionController extends Controller
                 $this->importTransactionsFromCSV($destinationPath . '/' . $fileName);
 
                 Session::flash('success', 'Upload successfully');
-                return redirect('/transactions');
+                return redirect('/' . trans('routes.transactions'));
             } else {
                 Session::flash('error', 'uploaded file is not valid');
-                return redirect('/transactions');
+                return redirect('/' . trans('routes.transactions'));
             }
         }
 
@@ -157,6 +157,18 @@ class TransactionController extends Controller
         $transaction->fill($request->all());
         $transaction->save();
 
+        $conceptCategory = DB::table('concept_category')->where('concept', '=', $request['concept'])->get();
+
+        if(empty($conceptCategory)){
+            DB::table('concept_category')->insert(
+                [
+                    'category_id' => $request['category_id'],
+                    'concept' => $request['concept']
+                ]
+            );
+        }
+
+
         $allUncategorized = Transaction::where('concept', '=', $request['concept'])->get();
 
         foreach ($allUncategorized as $uncategorized) {
@@ -165,7 +177,7 @@ class TransactionController extends Controller
             $uncategorized->save();
         }
 
-        return redirect('/transactions')->with('message', 'updated');
+        return redirect('/' . trans('routes.transactions'))->with('message', 'updated');
     }
 
     /**
@@ -186,10 +198,13 @@ class TransactionController extends Controller
      */
     public function importTransactionsFromCSV($file)
     {
-
-        $categoryConcepts = Cache::remember('concept_category', 30, function () {
+        $categoryConcepts = Cache::remember('concept_category', 1, function() {
             return DB::table('concept_category')->get(array('concept', 'category_id'));
         });
+
+        if(empty($categoryConcepts)){
+            $categoryConcepts = DB::table('concept_category')->get(array('concept', 'category_id'));
+        }
 
         $relations = array();
 
@@ -264,7 +279,6 @@ class TransactionController extends Controller
      */
     public function getGroupedCategories()
     {
-
         $categories = Category::join('category as sub', 'category.id', '=', 'sub.parent_id')
             ->get(
                 array(
@@ -278,17 +292,21 @@ class TransactionController extends Controller
 
         foreach ($categories as $key => $category) {
 
-            $subCategory[] = array(
-                'id' => $category->subCategoryId,
-                'name_es' => $category->subCategoryName,
-            );
-
             if (
-                isset($categoryName) &&
-                ($key + 1 == count($categories) || $categoryName != $category->categoryName)
+                isset($categoryName) && $categoryName != $category->categoryName
             ) {
                 $allCategories[$categoryName] = $subCategory;
                 unset($subCategory);
+            }
+
+            $subCategory[] = array(
+                'id' => $category->subCategoryId,
+                'name_es' => $category->subCategoryName,
+                'asdf' => $category->categoryName
+            );
+
+            if($key + 1== count($categories)){
+                $allCategories[$categoryName] = $subCategory;
             }
 
             $categoryName = $category->categoryName;
