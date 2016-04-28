@@ -112,7 +112,7 @@ class TransactionController extends Controller
 
         \Finance\Transaction::create($values);
 
-        return redirect('/transactions')->with('message', 'store');
+        return redirect('/' . trans('routes.transactions'))->with('message', 'store');
     }
 
     /**
@@ -201,10 +201,6 @@ class TransactionController extends Controller
         $categoryConcepts = Cache::remember('concept_category', 1, function() {
             return DB::table('concept_category')->get(array('concept', 'category_id'));
         });
-
-        if(empty($categoryConcepts)){
-            $categoryConcepts = DB::table('concept_category')->get(array('concept', 'category_id'));
-        }
 
         $relations = array();
 
