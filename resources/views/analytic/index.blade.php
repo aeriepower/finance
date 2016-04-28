@@ -60,7 +60,7 @@
         };
 
         var dummy = {
-            labels: {!! $labels !!},
+            labels: {{ $labels }},
             datasets: [
                 {
                     label: "My First dataset",
@@ -74,9 +74,9 @@
                 },
                 {
                     label: "My Second dataset",
-                    fillColor: "rgba(50,204,236, 0.3)",
-                    strokeColor: "rgba(50,204,236, 1)",
-                    pointColor: "rgba(50,204,236, 1)",
+                    fillColor: "rgba(48, 164, 255, 0.2)",
+                    strokeColor: "rgba(48, 164, 255, 1)",
+                    pointColor: "rgba(48, 164, 255, 1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(48, 164, 255, 1)",
