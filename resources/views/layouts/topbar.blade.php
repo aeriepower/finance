@@ -18,7 +18,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ trans('topbar.profile') }}</a></li>
                         <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> {{ trans('topbar.settings') }}</a></li>
-                        <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> {{ trans('topbar.logout') }}</a></li>
+                        <li><a href="{{ url('logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> {{ trans('topbar.logout') }}</a></li>
                     </ul>
                 </li>
             </ul>

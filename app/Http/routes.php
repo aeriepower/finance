@@ -16,6 +16,7 @@ Route::get(trans('routes.home'),'ReportController@index');
 Route::resource(trans('routes.transactions'),'TransactionController');
 Route::resource(trans('routes.user'),'UserController');
 Route::resource(trans('routes.login'),'LoginController');
+Route::get('logout', 'LoginController@logout');
 
 // Analytic controller
 Route::get(trans('routes.analysis'), 'AnalyticController@index');
