@@ -39,6 +39,9 @@
                     <div class="canvas-wrapper">
                         <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
                     </div>
+                    <div class="canvas-wrapper">
+                        <canvas class="main-chart" id="line-chart2" height="200" width="600"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,7 +62,7 @@
             return Math.round(Math.random() * 1000)
         };
 
-        var dummy = {
+        var data = {
             labels: {!! $labels !!},
             datasets: [
                 {
@@ -85,10 +88,84 @@
             ]
 
         }
+        var data2 = {
+            labels: {!! $cumulativeBillingByCategory['labels'] !!},
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(5,141,199,0.05)",
+                    strokeColor: "#058DC7",
+                    pointColor: "#058DC7",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: {{ $cumulativeBillingByCategory['line1'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(80,180,50,0.05)",
+                    strokeColor: "#50B432",
+                    pointColor: "#50B432",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line2'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(237,86,27,0.05)",
+                    strokeColor: "#ED561B",
+                    pointColor: "#ED561B",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line3'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(221,223,0,0.05)",
+                    strokeColor: "#DDDF00",
+                    pointColor: "#DDDF00",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line4'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(36,203,229,0.05)",
+                    strokeColor: "#24CBE5",
+                    pointColor: "#24CBE5",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line5'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(100,229,114,0.05)",
+                    strokeColor: "#64E572",
+                    pointColor: "#64E572",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line6'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(255,150,85,0.05)",
+                    strokeColor: "#FF9655",
+                    pointColor: "#FF9655",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line7'] }}
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(106,249,196,0.05)",
+                    strokeColor: "#6AF9C4",
+                    pointColor: "#6AF9C4",
+                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
+                    data: {{ $cumulativeBillingByCategory['line8'] }}
+                }
+            ]
+
+        }
 
         window.onload = function () {
             var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(dummy, {
+            window.myLine = new Chart(chart1).Line(data, {
+                responsive: true
+            });
+            var chart2 = document.getElementById("line-chart2").getContext("2d");
+            window.myLine = new Chart(chart2).Line(data2, {
                 responsive: true
             });
         };
