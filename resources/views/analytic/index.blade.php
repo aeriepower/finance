@@ -59,7 +59,7 @@
             return Math.round(Math.random() * 1000)
         };
 
-        var dummy = {
+        var data = {
             labels: {!! $labels !!},
             datasets: [
                 {
@@ -88,13 +88,13 @@
 
         window.onload = function () {
             var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(dummy, {
+            window.myLine = new Chart(chart1).Line(data, {
                 responsive: true
             });
         };
     </script>
 
     {!! Html::script('js/bootstrap-table.js') !!}
-    {!! Html::script('js/jquery-ui.js') !!}
+    {!! Html::script('js/jquery-ui.min.js') !!}
 
 @stop

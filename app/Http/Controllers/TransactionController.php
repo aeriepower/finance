@@ -163,7 +163,8 @@ class TransactionController extends Controller
             DB::table('concept_category')->insert(
                 [
                     'category_id' => $request['category_id'],
-                    'concept' => $request['concept']
+                    'concept' => $request['concept'],
+                    'created_at' => DATE('Y-m-d H:i:s')
                 ]
             );
         }

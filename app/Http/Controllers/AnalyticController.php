@@ -21,6 +21,7 @@ class AnalyticController extends Controller
             datetime
         '))
             ->whereBetween('datetime', array($dateFrom, $dateTo))
+            ->where('exception', '=', 0)
             ->groupBy(DB::raw('datetime'))
             ->orderBy('datetime', 'ASC')
             ->get();
