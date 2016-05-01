@@ -8,5 +8,6 @@ return [
     'analysis' => 'analysis',
     'concept' => 'transaction/concept/{concept}',
     'notice' => 'transaction/notice/',
-    'createUser' => 'user/create'
+    'createUser' => 'user/create',
+    'transactionByDate' => 'transacciones/fecha/{date}',
 ];
