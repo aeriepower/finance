@@ -9,5 +9,5 @@ return [
     'concept' => 'transaccion/concepto/{concept}',
     'notice' => 'transaccion/alerta/',
     'createUser' => 'usuario/create',
-    'transactionByDate' => 'transacciones/fecha/{date}',
+    'transactionByDate' => 'transacciones/fecha/',
 ];

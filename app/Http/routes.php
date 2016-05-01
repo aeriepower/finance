@@ -23,4 +23,4 @@ Route::get(trans('routes.analysis'), 'AnalyticController@index');
 Route::post(trans('routes.analysis'), 'AnalyticController@index');
 Route::get(trans('routes.concept'),'TransactionController@concept')->name('concept');
 Route::get(trans('routes.notice'),'TransactionController@notice')->name('notice');
-Route::get(trans('routes.transactionByDate'),'TransactionController@byDate')->name('byDate');
+Route::get(trans('routes.transactionByDate') . '{date}','TransactionController@byDate');

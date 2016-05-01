@@ -159,7 +159,7 @@ class TransactionController extends Controller
 
         $conceptCategory = DB::table('concept_category')->where('concept', '=', $request['concept'])->get();
 
-        if(empty($conceptCategory)){
+        if (empty($conceptCategory)) {
             DB::table('concept_category')->insert(
                 [
                     'category_id' => $request['category_id'],
@@ -199,7 +199,7 @@ class TransactionController extends Controller
      */
     public function importTransactionsFromCSV($file)
     {
-        $categoryConcepts = Cache::remember('concept_category', 1, function() {
+        $categoryConcepts = Cache::remember('concept_category', 1, function () {
             return DB::table('concept_category')->get(array('concept', 'category_id'));
         });
 
@@ -302,7 +302,7 @@ class TransactionController extends Controller
                 'asdf' => $category->categoryName
             );
 
-            if($key + 1== count($categories)){
+            if ($key + 1 == count($categories)) {
                 $allCategories[$categoryName] = $subCategory;
             }
 
@@ -310,5 +310,19 @@ class TransactionController extends Controller
         }
 
         return $allCategories;
+    }
+
+    public function byDate($date)
+    {
+        $transactions = Transaction::select(DB::raw('*'))
+            ->where('user_id', '=', Auth::user()->id)
+            ->where(DB::raw('DATE(datetime) = ' . DATE('Y-m-d', strtotime($date))))
+            ->orderBy('datetime', 'desc')
+            ->get();
+
+        return view('transaction.index', [
+            'title' => trans('helper.transaction'),
+            'tableData' => $transactions,
+        ]);
     }
 }

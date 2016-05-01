@@ -74,14 +74,8 @@
 
 @section('script')
     <script>
-        //$('#dateFrom').datepicker("dateFormat", "yy/mm/dd" );
-        //$('#dateTo').datepicker( "dateFormat", "yy/mm/dd" );
-        $("#dateFrom").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
-        $("#dateTo").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
+        $("#dateFrom").datepicker();
+        $("#dateTo").datepicker();
 
         line1 = {!! $line1 !!} ;
         line2 = {!! $line2 !!} ;
@@ -132,7 +126,6 @@
 
         var data2 = {
             labels: {!! $cumulativeBillingByCategory['labels'] !!},
-
             datasets: [
                     @for ($i = 1; $i <= count($cumulativeBillingByCategory['lines']); $i++)
                 {
@@ -143,15 +136,7 @@
                     data: {{ $cumulativeBillingByCategory['lines']['line' . $i] }}
                 },
                 @endfor
-
-            ],
-            colours: [{
-                fillColor: 'rgba(47, 132, 71, 0.8)',
-                strokeColor: 'rgba(47, 132, 71, 0.8)',
-                highlightFill: 'rgba(47, 132, 71, 0.8)',
-                highlightStroke: 'rgba(47, 132, 71, 0.8)'
-            }]
-
+            ]
         }
 
 
@@ -159,18 +144,16 @@
             type: 'line',
             data: data,
             options: {
-                responsive: true,
                 onClick: function (event) {
-                    manolo = myLineChart.getElementAtEvent(event);
-                    index = manolo[0]['_index'];
-                    console.log(mylabels[index]);
-                    {{--window.location.href = {{url(trans('routes.transactionByDate'))}};--}}
+                    eventElement = myLineChart.getElementAtEvent(event);
+                    if (eventElement[0] != undefined) {
+                        index = eventElement[0]['_index'];
+                        window.location.href = 'transacciones/fecha/' + mylabels[index];
+                    }
                 },
+                responsive: true,
                 tooltips: {
                     mode: 'label',
-                },
-                hover: {
-                    mode: 'dataset'
                 },
             },
         });
@@ -178,18 +161,19 @@
             type: 'line',
             data: data2,
             options: {
+                onClick: function (event) {
+                    eventElement = myLineChart2.getElementAtEvent(event);
+                    if (eventElement[0] != undefined) {
+                        index = eventElement[0]['_index'];
+                        window.location.href = 'transacciones/fecha/' + mylabels[index];
+                    }
+                },
                 responsive: true,
                 tooltips: {
                     mode: 'label',
                 },
-                hover: {
-                    mode: 'dataset'
-                },
-            }
+            },
         });
-
-
-
     </script>
 
     {!! Html::script('js/bootstrap-table.js') !!}
