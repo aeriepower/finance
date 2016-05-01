@@ -11,6 +11,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
+
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-4">Cumulative cashflow overview</div>
@@ -35,17 +36,40 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4">Billing per category</div>
+                    </div>
+                </div>
+
+
+                <div class="panel-body">
                     <div class="canvas-wrapper">
                         <canvas class="main-chart" id="line-chart2" height="200" width="600"></canvas>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
 @stop
 
 @section('script')
@@ -58,117 +82,114 @@
         $("#dateTo").datepicker({
             dateFormat: "yy-mm-dd"
         });
-        var randomScalingFactor = function () {
-            return Math.round(Math.random() * 1000)
-        };
 
+        line1 = {!! $line1 !!} ;
+        line2 = {!! $line2 !!} ;
+        mylabels = {!! $labels !!};
         var data = {
-            labels: {!! $labels !!},
+            labels: mylabels,
             datasets: [
                 {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {{ $line1 }}
+                    label: "Ingresos",
+                    pointColor: '#24CBE5',
+                    borderColor: '#24CBE5',
+                    backgroundColor: 'rgba(36,203,229,0.05)',
+                    borderDash: [8, 8],
+                    data: line1
                 },
                 {
-                    label: "My Second dataset",
-                    fillColor: "rgba(48, 164, 255, 0.2)",
-                    strokeColor: "rgba(48, 164, 255, 1)",
-                    pointColor: "rgba(48, 164, 255, 1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $line2 }}
+                    label: "Gastos",
+                    pointColor: '#FF9655',
+                    borderColor: '#FF9655',
+                    backgroundColor: 'rgba(255,150,85,0.05)',
+                    data: line2
                 }
             ]
 
         }
+
+        var labels = [
+            "Compras",
+            "Ocio y transporte",
+            "Vivienda y vehículo",
+            "Salud, saber y deporte",
+            "Servicios típicos",
+            "Seguros",
+            "Bancos y organismos",
+            "Gastos varios",
+        ];
+
+        var colors = [
+            '#058DC7',
+            '#50B432',
+            '#ED561B',
+            '#DDDF00',
+            '#24CBE5',
+            '#64E572',
+            '#FF9655',
+            '#6AF9C4',
+        ];
+
         var data2 = {
             labels: {!! $cumulativeBillingByCategory['labels'] !!},
+
             datasets: [
+                    @for ($i = 1; $i <= count($cumulativeBillingByCategory['lines']); $i++)
                 {
-                    label: "My First dataset",
-                    fillColor: "rgba(5,141,199,0.05)",
-                    strokeColor: "#058DC7",
-                    pointColor: "#058DC7",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {{ $cumulativeBillingByCategory['line1'] }}
+                    label: labels[{{ $i-1 }}],
+                    pointColor: colors[{{ $i }}],
+                    borderColor: colors[{{ $i }}],
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    data: {{ $cumulativeBillingByCategory['lines']['line' . $i] }}
                 },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(80,180,50,0.05)",
-                    strokeColor: "#50B432",
-                    pointColor: "#50B432",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line2'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(237,86,27,0.05)",
-                    strokeColor: "#ED561B",
-                    pointColor: "#ED561B",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line3'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(221,223,0,0.05)",
-                    strokeColor: "#DDDF00",
-                    pointColor: "#DDDF00",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line4'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(36,203,229,0.05)",
-                    strokeColor: "#24CBE5",
-                    pointColor: "#24CBE5",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line5'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(100,229,114,0.05)",
-                    strokeColor: "#64E572",
-                    pointColor: "#64E572",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line6'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(255,150,85,0.05)",
-                    strokeColor: "#FF9655",
-                    pointColor: "#FF9655",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line7'] }}
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(106,249,196,0.05)",
-                    strokeColor: "#6AF9C4",
-                    pointColor: "#6AF9C4",
-                    pointHighlightStroke: "rgba(48, 164, 255, 1)",
-                    data: {{ $cumulativeBillingByCategory['line8'] }}
-                }
-            ]
+                @endfor
+
+            ],
+            colours: [{
+                fillColor: 'rgba(47, 132, 71, 0.8)',
+                strokeColor: 'rgba(47, 132, 71, 0.8)',
+                highlightFill: 'rgba(47, 132, 71, 0.8)',
+                highlightStroke: 'rgba(47, 132, 71, 0.8)'
+            }]
 
         }
 
-        window.onload = function () {
-            var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(data, {
-                responsive: true
-            });
-            var chart2 = document.getElementById("line-chart2").getContext("2d");
-            window.myLine = new Chart(chart2).Line(data2, {
-                responsive: true
-            });
-        };
+
+        var myLineChart = new Chart($('#line-chart'), {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                onClick: function (event) {
+                    manolo = myLineChart.getElementAtEvent(event);
+                    index = manolo[0]['_index'];
+                    console.log(mylabels[index]);
+                    {{--window.location.href = {{url(trans('routes.transactionByDate'))}};--}}
+                },
+                tooltips: {
+                    mode: 'label',
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+            },
+        });
+        var myLineChart2 = new Chart($('#line-chart2'), {
+            type: 'line',
+            data: data2,
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'label',
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+            }
+        });
+
+
+
     </script>
 
     {!! Html::script('js/bootstrap-table.js') !!}
