@@ -86,6 +86,7 @@ class AnalyticController extends Controller
             DATE(datetime) as datetime
         '))
             ->join('category', 'transaction.category_id', '=', 'category.id')
+            ->where('exception', '=', 0)
             ->whereBetween('datetime', array($dateFrom, $dateTo))
             ->groupBy(DB::raw('DATE(datetime)'))
             ->orderBy('datetime', 'ASC')
@@ -138,17 +139,20 @@ class AnalyticController extends Controller
             $cumulative8 = $cumulative8+ ($transaction->category8 * -1);
             $line8[] = $cumulative8;
         }
-        return array(
-            'labels' => json_encode($labels),
-            'line1' => json_encode($line1),
-            'line2' => json_encode($line2),
-            'line3' => json_encode($line3),
-            'line4' => json_encode($line4),
-            'line5' => json_encode($line5),
-            'line6' => json_encode($line6),
-            'line7' => json_encode($line7),
-            'line8' => json_encode($line8),
-        );
+        return
+            array(
+                'labels' => json_encode($labels),
+                'lines' => array(
+                    'line1' => json_encode($line1),
+                    'line2' => json_encode($line2),
+                    'line3' => json_encode($line3),
+                    'line4' => json_encode($line4),
+                    'line5' => json_encode($line5),
+                    'line6' => json_encode($line6),
+                    'line7' => json_encode($line7),
+                    'line8' => json_encode($line8),
+                )
+            );
     }
 
     /**
