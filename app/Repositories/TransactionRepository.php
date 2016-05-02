@@ -15,6 +15,11 @@ class TransactionRepository
         $this->user = Auth::user();
     }
 
+    public function find($id)
+    {
+        return Transaction::find($id);
+    }
+
     /**
      * @param $date
      */
@@ -26,7 +31,11 @@ class TransactionRepository
             ->get();
     }
 
-    public function uncategorized(){
+    /**
+     * @return array
+     */
+    public function uncategorized()
+    {
         return Transaction::select(DB::raw('*'))
             ->where('category_id', '=', null)
             ->where('user_id', '=', $this->user->id)
@@ -34,8 +43,12 @@ class TransactionRepository
             ->orderBy('datetime', 'desc')
             ->get();
     }
-    
-    public function lastTransaction(){
+
+    /**
+     * @return array
+     */
+    public function lastTransaction()
+    {
         return Transaction::where('user_id', $this->user->id)
             ->orderBy('id', 'desc')
             ->take(1)

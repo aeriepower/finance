@@ -146,7 +146,7 @@ class TransactionController extends Controller
 
         return view('transaction.update', [
             'title' => trans('helper.transaction'),
-            'transaction' => Transaction::find($id),
+            'transaction' => $this->TransactionRepo->find($id),
             'categories' => $categories
         ]);
     }
@@ -161,7 +161,7 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
 
-        $transaction = Transaction::find($id);
+        $transaction = $this->TransactionRepo->find($id);
         $transaction->fill($request->all());
         $transaction->save();
 
