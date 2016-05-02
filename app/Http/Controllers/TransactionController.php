@@ -97,10 +97,7 @@ class TransactionController extends Controller
             }
         }
 
-        $lastTransaction = Transaction::where('user_id', $this->user->id)
-            ->orderBy('id', 'desc')
-            ->take(1)
-            ->get();
+        $lastTransaction = $this->TransactionRepo->lastTransaction();
 
 
         if (isset($lastTransaction[0])) {
