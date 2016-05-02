@@ -11,6 +11,9 @@ This is a small app to save the banking movements, an lately filter them by cate
 
 - Download the project using GIT
 - Create in your local a database called finance
-- In your command pront go to the project's folder and execute 'php artisan migrate'
+- In your command prompt go to the project's folder and execute the following commands:
+    -'php artisan migrate'
+    -'php artisan db:seed'
+    -'composer dump-autoload'
 - Then execute 'php artisan serve'
 - Go to address given in your browser and enjoy it
