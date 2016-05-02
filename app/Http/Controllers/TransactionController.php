@@ -260,12 +260,7 @@ class TransactionController extends Controller
      */
     public function notice()
     {
-        $transactions = Transaction::select(DB::raw('*'))
-            ->where('category_id', '=', null)
-            ->where('user_id', '=', Auth::user()->id)
-            ->groupBy('concept')
-            ->orderBy('datetime', 'desc')
-            ->get();
+        $transactions = $this->TransactionRepo->uncategorized();
 
 
         return view('transaction.index', [

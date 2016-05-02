@@ -18,4 +18,13 @@ class TransactionRepository
             ->where(DB::raw('DATE(datetime)'), '=', DATE('Y-m-d', strtotime($date)))
             ->get();
     }
+
+    public function uncategorized(){
+        return Transaction::select(DB::raw('*'))
+            ->where('category_id', '=', null)
+            ->where('user_id', '=', Auth::user()->id)
+            ->groupBy('concept')
+            ->orderBy('datetime', 'desc')
+            ->get();
+    }
 }
