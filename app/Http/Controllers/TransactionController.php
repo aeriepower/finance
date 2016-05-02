@@ -178,7 +178,7 @@ class TransactionController extends Controller
         }
 
 
-        $allUncategorized = Transaction::where('concept', '=', $request['concept'])->get();
+        $allUncategorized = $this->TransactionRepo->byConcept($request['concept']);
 
         foreach ($allUncategorized as $uncategorized) {
             $uncategorized->category_id = $transaction->category_id;

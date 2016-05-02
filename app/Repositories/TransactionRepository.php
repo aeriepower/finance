@@ -31,6 +31,13 @@ class TransactionRepository
             ->get();
     }
 
+    public function byConcept($concept)
+    {
+        return Transaction::where('concept', '=', $concept)
+            ->where('user_id', '=', $this->user->id)
+            ->get();
+    }
+
     /**
      * @return array
      */
