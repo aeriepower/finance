@@ -108,17 +108,11 @@ class TransactionController extends Controller
             $account_balance = $request['amount'];
         }
 
-        $values = array(
-            'concept' => $request['concept'],
-            'data' => $request['data'],
-            'amount' => $request['amount'],
-            'account_balance' => $account_balance,
-            'datetime' => date('Y-m-d H:i:s'),
-            'billing' => $request['amount'] > 0 ? 0 : 1,
-            'user_id' => $this->user->id,
-            'category_id' => $request['category'],
-            'provider_id' => null
-        );
+        $values = $request->all();
+        $values['account_balance'] = $account_balance;
+        $values['datetime'] = date('Y-m-d H:i:s');
+        $values['billing'] = $request['amount'] > 0 ? 0 : 1;
+        $values['user_id'] = $this->user->id;
 
         \Finance\Transaction::create($values);
 
