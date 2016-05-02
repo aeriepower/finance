@@ -13,19 +13,25 @@ use Illuminate\Support\Facades\DB;
 use Finance\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\TransactionRepository;
+use App\Repositories\CategoryRepository;
 
 class TransactionController extends Controller
 {
 
     protected $TransactionRepo;
+    protected $CategoryRepo;
     protected $user;
 
     /**
      * TransactionController constructor.
      */
-    public function __construct(TransactionRepository $transactionRepository)
+    public function __construct(
+        TransactionRepository $transactionRepository,
+        CategoryRepository $categoryRepository
+    )
     {
         $this->TransactionRepo = $transactionRepository;
+        $this->CategoryRepo = $categoryRepository;
         $this->middleware('auth');
         $this->user = Auth::user();
     }
@@ -276,14 +282,7 @@ class TransactionController extends Controller
      */
     public function getGroupedCategories()
     {
-        $categories = Category::join('category as sub', 'category.id', '=', 'sub.parent_id')
-            ->get(
-                array(
-                    'category.name_es as categoryName',
-                    'sub.name_es as subCategoryName',
-                    'sub.id as subCategoryId'
-                )
-            );
+        $categories = $this->CategoryRepo->getGrouped();
 
         $allCategories = array();
 
