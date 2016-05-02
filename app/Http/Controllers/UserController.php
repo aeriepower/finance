@@ -2,6 +2,7 @@
 
 namespace Finance\Http\Controllers;
 
+use Finance\User;
 use Session;
 use Redirect;
 use Illuminate\Http\Request;
@@ -93,6 +94,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect(trans('routes.home'));
     }
 }

@@ -199,7 +199,9 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaction = $this->TransactionRepo->byId($id);
+        $transaction->delete();
+        return redirect(trans('routes.transactions'));
     }
 
     /**

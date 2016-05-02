@@ -3,11 +3,22 @@
 namespace Finance\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Repositories\CategoryRepository;
 use Finance\Http\Requests;
 
 class CategoryController extends Controller
 {
+    protected $CategoryRepo;
+    protected $user;
+
+    public function __construct(
+        CategoryRepository $categoryRepository
+    )
+    {
+        $this->CategoryRepo = $categoryRepository;
+        $this->user = Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -81,6 +92,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = $this->CategoryRepo->byId($id);
+        $category->delete();
+        return redirect(trans('routes.home'));
     }
 }
