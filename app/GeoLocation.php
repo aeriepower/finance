@@ -3,9 +3,12 @@
 namespace Finance;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GeoLocation extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'geo_location';
 
     /**
@@ -21,6 +24,11 @@ class GeoLocation extends Model
         'name_en',
         'name_es'
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

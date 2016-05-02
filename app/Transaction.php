@@ -3,9 +3,12 @@
 namespace Finance;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'transaction';
 
     protected $showFields = array(
@@ -31,6 +34,11 @@ class Transaction extends Model
         'reiterate',
         'exception',
     );
+
+    /**
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
