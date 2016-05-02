@@ -316,9 +316,9 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::select(DB::raw('*'))
             ->where('user_id', '=', Auth::user()->id)
-            ->where(DB::raw('DATE(datetime) = ' . DATE('Y-m-d', strtotime($date))))
-            ->orderBy('datetime', 'desc')
+            ->where(DB::raw('DATE(datetime)'), '=', DATE('Y-m-d', strtotime($date)))
             ->get();
+
 
         return view('transaction.index', [
             'title' => trans('helper.transaction'),
