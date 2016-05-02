@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Finance\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class TransactionRepository
@@ -63,12 +64,22 @@ class TransactionRepository
      */
     public function uncategorized()
     {
-        return Transaction::select(DB::raw('*'))
-            ->where('category_id', '=', null)
-            ->where('user_id', '=', $this->user->id)
-            ->groupBy('concept')
-            ->orderBy('datetime', 'desc')
-            ->get();
+        $uncategorizedTransactions = Cache::remember('uncategorized', 1, function () {
+            return Transaction::select(DB::raw('*'))
+                ->where('category_id', '=', null)
+                ->where('user_id', '=', $this->user->id)
+                ->groupBy('concept')
+                ->orderBy('datetime', 'desc')
+                ->get();return Category::join('category as sub', 'category.id', '=', 'sub.parent_id')
+                ->get(
+                    array(
+                        'category.name_es as categoryName',
+                        'sub.name_es as subCategoryName',
+                        'sub.id as subCategoryId'
+                    )
+                );
+        });
+        return $uncategorizedTransactions;
     }
 
     /**
@@ -78,9 +89,13 @@ class TransactionRepository
      */
     public function lastTransaction()
     {
-        return Transaction::where('user_id', $this->user->id)
-            ->orderBy('id', 'desc')
-            ->take(1)
-            ->get();
+        $lastTransaction = Cache::remember('lastTransaction', 1, function () {
+
+            return Transaction::where('user_id', $this->user->id)
+                ->orderBy('id', 'desc')
+                ->take(1)
+                ->get();
+        });
+        return $lastTransaction;
     }
 }
