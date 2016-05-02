@@ -10,18 +10,30 @@ class TransactionRepository
 {
     protected $user;
 
+    /**
+     * TransactionRepository constructor.
+     */
     public function __construct()
     {
         $this->user = Auth::user();
     }
 
-    public function find($id)
+    /**
+     * Find a transaction by id
+     *
+     * @param $id
+     * @return array
+     */
+    public function byId($id)
     {
         return Transaction::find($id);
     }
 
     /**
+     * Find all transaction by datetime
+     *
      * @param $date
+     * @return array
      */
     public function byDate($date)
     {
@@ -31,6 +43,12 @@ class TransactionRepository
             ->get();
     }
 
+    /**
+     * Find all transaction by concept
+     *
+     * @param $concept
+     * @return array
+     */
     public function byConcept($concept)
     {
         return Transaction::where('concept', '=', $concept)
@@ -39,6 +57,8 @@ class TransactionRepository
     }
 
     /**
+     * Find all transaction without category_id
+     *
      * @return array
      */
     public function uncategorized()
@@ -52,6 +72,8 @@ class TransactionRepository
     }
 
     /**
+     * Find the user's last transaction
+     *
      * @return array
      */
     public function lastTransaction()

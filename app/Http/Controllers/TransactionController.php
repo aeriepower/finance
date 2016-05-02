@@ -24,6 +24,8 @@ class TransactionController extends Controller
 
     /**
      * TransactionController constructor.
+     * @param TransactionRepository $transactionRepository
+     * @param CategoryRepository $categoryRepository
      */
     public function __construct(
         TransactionRepository $transactionRepository,
@@ -146,7 +148,7 @@ class TransactionController extends Controller
 
         return view('transaction.update', [
             'title' => trans('helper.transaction'),
-            'transaction' => $this->TransactionRepo->find($id),
+            'transaction' => $this->TransactionRepo->byId($id),
             'categories' => $categories
         ]);
     }
@@ -161,7 +163,7 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
 
-        $transaction = $this->TransactionRepo->find($id);
+        $transaction = $this->TransactionRepo->byId($id);
         $transaction->fill($request->all());
         $transaction->save();
 
