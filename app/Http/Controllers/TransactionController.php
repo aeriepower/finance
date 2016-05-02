@@ -18,6 +18,7 @@ class TransactionController extends Controller
 {
 
     protected $TransactionRepo;
+    protected $user;
 
     /**
      * TransactionController constructor.
@@ -26,6 +27,7 @@ class TransactionController extends Controller
     {
         $this->TransactionRepo = $transactionRepository;
         $this->middleware('auth');
+        $this->user = Auth::user();
     }
 
 
@@ -68,8 +70,6 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $userId = Auth::user()->id;
-
         /**
          * In case the is uploaded an CSV with the transactions,
          * will import from all transactions inside
@@ -78,7 +78,7 @@ class TransactionController extends Controller
             if ($request->file('file')->isValid()) {
                 $destinationPath = 'resources/upload/transaction';
                 $extension = strtolower($request->file('file')->getClientOriginalExtension());
-                $fileName = $userId . '-' . rand(11111, 99999) . '.' . $extension;
+                $fileName = $this->user->id . '-' . rand(11111, 99999) . '.' . $extension;
                 $request->file('file')->move($destinationPath, $fileName);
 
                 $this->importTransactionsFromCSV($destinationPath . '/' . $fileName);
@@ -91,7 +91,7 @@ class TransactionController extends Controller
             }
         }
 
-        $lastTransaction = Transaction::where('user_id', $userId)
+        $lastTransaction = Transaction::where('user_id', $this->user->id)
             ->orderBy('id', 'desc')
             ->take(1)
             ->get();
@@ -110,7 +110,7 @@ class TransactionController extends Controller
             'account_balance' => $account_balance,
             'datetime' => date('Y-m-d H:i:s'),
             'billing' => $request['amount'] > 0 ? 0 : 1,
-            'user_id' => $userId,
+            'user_id' => $this->user->id,
             'category_id' => $request['category'],
             'provider_id' => null
         );
@@ -226,7 +226,7 @@ class TransactionController extends Controller
                 'account_balance' => (int)$accountBalance,
                 'datetime' => date('Y-m-d', strtotime(str_replace('/', '-', $row[2]))),
                 'billing' => (int)$row[4] > 0 ? 0 : 1,
-                'user_id' => Auth::user()->id,
+                'user_id' => $this->user->id,
                 'category_id' => isset($relations[$row[0]]) ? $relations[$row[0]] : null,
                 'provider_id' => null
             );
