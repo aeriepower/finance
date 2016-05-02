@@ -4,6 +4,7 @@ namespace Finance\Http\Controllers;
 
 use Finance\Category;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 use Session;
 use Redirect;
 use Finance\Transaction;
@@ -11,15 +12,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Finance\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\TransactionRepository;
 
 class TransactionController extends Controller
 {
 
+    protected $TransactionRepo;
+
     /**
      * TransactionController constructor.
      */
-    public function __construct()
+    public function __construct(TransactionRepository $transactionRepository)
     {
+        $this->TransactionRepo = $transactionRepository;
         $this->middleware('auth');
     }
 
@@ -312,13 +317,16 @@ class TransactionController extends Controller
         return $allCategories;
     }
 
+    /**
+     * Filter the transactions by given Date
+     * and return a view with a list of these transactions
+     *
+     * @param string $date
+     * @return View
+     */
     public function byDate($date)
     {
-        $transactions = Transaction::select(DB::raw('*'))
-            ->where('user_id', '=', Auth::user()->id)
-            ->where(DB::raw('DATE(datetime)'), '=', DATE('Y-m-d', strtotime($date)))
-            ->get();
-
+        $transactions = $this->TransactionRepo->byDate($date);
 
         return view('transaction.index', [
             'title' => trans('helper.transaction'),
