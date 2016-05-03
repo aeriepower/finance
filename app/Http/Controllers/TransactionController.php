@@ -255,6 +255,7 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::select(DB::raw('*'))
             ->where('concept', '=', $concept)
+            ->where('user_id', '=', $this->user->id)
             ->orderBy('datetime', 'Desc')
             ->get();
 
