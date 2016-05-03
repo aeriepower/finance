@@ -30,8 +30,7 @@ class TransactionController extends Controller
     public function __construct(
         TransactionRepository $transactionRepository,
         CategoryRepository $categoryRepository
-    )
-    {
+    ) {
         $this->TransactionRepo = $transactionRepository;
         $this->CategoryRepo = $categoryRepository;
         $this->middleware('auth');
@@ -138,11 +137,15 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
+        $transaction = $this->TransactionRepo->byId($id);
+
+        $this->authorize('owner', $transaction);
+
         $categories = $this->getGroupedCategories();
 
         return view('transaction.update', [
             'title' => trans('helper.transaction'),
-            'transaction' => $this->TransactionRepo->byId($id),
+            'transaction' => $transaction,
             'categories' => $categories
         ]);
     }
@@ -158,6 +161,9 @@ class TransactionController extends Controller
     {
 
         $transaction = $this->TransactionRepo->byId($id);
+
+        $this->authorize('owner', $transaction);
+
         $transaction->fill($request->all());
         $transaction->save();
 
@@ -194,7 +200,11 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         $transaction = $this->TransactionRepo->byId($id);
+
+        $this->authorize('owner', $transaction);
+
         $transaction->delete();
+
         return redirect(trans('routes.transactions'));
     }
 
