@@ -70,14 +70,7 @@ class TransactionRepository
                 ->where('user_id', '=', $this->user->id)
                 ->groupBy('concept')
                 ->orderBy('datetime', 'desc')
-                ->get();return Category::join('category as sub', 'category.id', '=', 'sub.parent_id')
-                ->get(
-                    array(
-                        'category.name_es as categoryName',
-                        'sub.name_es as subCategoryName',
-                        'sub.id as subCategoryId'
-                    )
-                );
+                ->get();
         });
         return $uncategorizedTransactions;
     }
