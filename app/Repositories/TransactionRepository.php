@@ -70,15 +70,12 @@ class TransactionRepository
      */
     public function uncategorized()
     {
-        $uncategorizedTransactions = Cache::remember('uncategorized', 1, function () {
-            return Transaction::select(DB::raw('*'))
-                ->where('category_id', '=', null)
-                ->where('user_id', '=', $this->user->id)
-                ->groupBy('concept')
-                ->orderBy('datetime', 'desc')
-                ->get();
-        });
-        return $uncategorizedTransactions;
+        return Transaction::select(DB::raw('*'))
+            ->where('category_id', '=', null)
+            ->where('user_id', '=', $this->user->id)
+            ->groupBy('concept')
+            ->orderBy('datetime', 'desc')
+            ->get();
     }
 
     /**
@@ -88,13 +85,9 @@ class TransactionRepository
      */
     public function lastTransaction()
     {
-        $lastTransaction = Cache::remember('lastTransaction', 1, function () {
-
-            return Transaction::where('user_id', $this->user->id)
+        return Transaction::where('user_id', $this->user->id)
                 ->orderBy('id', 'desc')
                 ->take(1)
                 ->get();
-        });
-        return $lastTransaction;
     }
 }
