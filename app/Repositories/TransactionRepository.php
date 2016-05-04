@@ -27,7 +27,13 @@ class TransactionRepository
      */
     public function byId($id)
     {
-        return Transaction::find($id);
+        if (Cache::has('byId' . $id)) {
+            $transaction =  Cache::get('byId' . $id);
+        } else {
+            $transaction = Transaction::find($id);
+            Cache::put('byId' . $id, $transaction, 1);
+        }
+        return $transaction;
     }
 
     /**
