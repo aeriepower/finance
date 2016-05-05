@@ -90,4 +90,14 @@ class TransactionRepository
                 ->take(1)
                 ->get();
     }
+
+
+    public function accountBalanceSummary(){
+        return Transaction::where('user_id', $this->user->id)
+            ->where(DB::raw('YEAR(datetime)'), '=', DB::raw('YEAR(CURDATE())'))
+            ->orderBy('datetime', 'asc')
+            ->groupBy(DB::raw("DATE(datetime)"))
+            ->get(array('account_balance', 'datetime'));
+    }
+    
 }

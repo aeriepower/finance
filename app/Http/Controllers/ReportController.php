@@ -57,6 +57,16 @@ class ReportController extends Controller
             'content' => 'content'
         );
 
+        $accountBalances = $this->TransactionRepo->accountBalanceSummary()->all();
+
+        foreach ($accountBalances as $accountBalance){
+            $label[] = DATE('Y-m', strtotime($accountBalance->datetime));
+            $line1[] = $accountBalance->account_balance;
+        }
+
+        $data['charts']['accountBalance']['label'] = json_encode($label);
+        $data['charts']['accountBalance']['line1'] = json_encode($line1);
+
         return view('report.index',[
             'title' => 'Dashboard',
             'data' => $data
