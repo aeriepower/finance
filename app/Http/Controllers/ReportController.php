@@ -21,8 +21,37 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $data = array();
+        
+        $data['panels'] = array();
+
+        $data['panels']['panel1'] = array(
+            'type' => 'success',
+            'title' => 'title1',
+            'content' => 'content'
+        );
+
+        $data['panels']['panel2'] = array(
+            'type' => 'info',
+            'title' => 'title2',
+            'content' => 'content'
+        );
+
+        $data['panels']['panel3'] = array(
+            'type' => 'warning',
+            'title' => 'title3',
+            'content' => 'content'
+        );
+
+        $data['panels']['panel4'] = array(
+            'type' => 'danger',
+            'title' => 'title4',
+            'content' => 'content'
+        );
+
         return view('report.index',[
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'data' => $data
         ]);
     }
 }
