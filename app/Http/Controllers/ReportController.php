@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use App\Repositories\TransactionRepository;
 use Finance\Http\Requests;
 
+/**
+ * This controller's mission is to manage the processes
+ * to show the views for all the reports
+ *
+ * Class ReportController
+ * @package Finance\Http\Controllers
+ */
 class ReportController extends Controller
 {
     protected $TransactionRepo;
