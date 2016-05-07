@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'home' => '/',
+    'landing' => '/',
+    'home' => '/home',
     'transactions' => 'transacciones',
     'user' => 'usuario',
     'login' => 'login',

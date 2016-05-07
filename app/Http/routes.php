@@ -11,7 +11,9 @@
 |
 */
 
-
+Route::get(trans('/'),function(){
+    return View::make("welcome");
+})->name(trans('landing'));
 Route::get(trans('routes.home'),'ReportController@index');
 Route::resource(trans('routes.transactions'),'TransactionController');
 Route::resource(trans('routes.user'),'UserController');

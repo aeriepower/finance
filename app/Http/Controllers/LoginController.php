@@ -44,7 +44,7 @@ class LoginController extends Controller
             'password' => $request['password']
         );
         if(Auth::attempt($credentials)){
-            return Redirect::to('/');
+            return redirect()->to(trans('routes.home'));
         } else {
             Session::flash('msg-error', trans('helper.login-incorrect'));
             return Redirect::to('login');
