@@ -1,0 +1,147 @@
+body {
+    background-color: #fff;
+}
+button a {
+    color: inherit;
+    text-decoration: none;
+}
+.welcome-parallax {
+    width: 1920px;
+    height: 620px;
+    background: transparent;
+}
+.welcome {
+    position: relative;
+    margin-top: -40px;
+}
+h1,h2, button{
+    font-family: 'Cabin', Helvetica Neue, Sans-serif;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    display: block;
+    top:40%;
+}
+h1 {
+    font-size: 60px;
+}
+h2 {
+    font-size: 30px;
+    top:35%;
+}
+button {
+    background-color: rgba(241,108,32,0.4);
+    border-radius: 30px;
+    border: 3px solid #f16c20;
+    padding: 10px 60px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: #ffffff;
+    text-decoration: none;
+}
+.shadow {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    background: rgba(2, 75, 90, 0.48);
+}
+.tips {
+    width: 1140px;
+    margin: 100px auto;
+}
+.tips h3 {
+    text-align: center;
+    color: #4AC7E4;
+}
+.tips p{
+    text-align: justify;
+}
+.tips img {
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Responsive section */
+.responsive {
+    display: block;
+    position: relative;
+    width: 792px;
+    height: 420px;
+    margin: 0 auto;
+}
+.display {
+    background-image: url('../img/landing/responsive/display.png');
+    width: 474px;
+    height: 394px;
+    left: 85px;
+    z-index: 2;
+}
+.display-content {
+    background: transparent;
+    width: 435px;
+    height: 260px;
+    position: relative;
+    top: 18px;
+    left: 19px;
+}
+
+.laptop {
+    background-image: url('../img/landing/responsive/laptop.png');
+    width: 423px;
+    height: 277px;
+    right: 0;
+    z-index: 1;
+}
+.laptop-content {
+    background: transparent;
+    width: 367px;
+    height: 230px;
+    position: relative;
+    top: 16px;
+}
+
+.tablet {
+    background-image: url('../img/landing/responsive/tablet.png');
+    width: 284px;
+    height: 220px;
+    left: 0;
+    z-index: 3;
+}
+.tablet-content {
+    background: transparent;
+    position: relative;
+    width: 253px;
+    height: 174px;
+    top: 24px;
+    left: 25px;
+}
+
+.movil {
+    background-image: url('../img/landing/responsive/movil.png');
+    width: 101px;
+    height: 205px;
+    left: 187px;
+    z-index: 4;
+}
+.movil-content {
+    background: transparent;
+    position: relative;
+    width: 84px;
+    height: 149px;
+    top: 26px;
+    left: 7px;
+}
+
+.parallax-window {
+    height: 600px;
+    background: transparent;
+}
+.display ,.laptop ,.tablet ,.movil {
+    display: block;
+    position: absolute;
+    bottom: 0;
+}

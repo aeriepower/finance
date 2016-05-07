@@ -12,7 +12,7 @@
 */
 
 Route::get(trans('/'),function(){
-    return View::make("welcome");
+    return View::make("landing");
 })->name(trans('landing'));
 Route::get(trans('routes.home'),'ReportController@index');
 Route::resource(trans('routes.transactions'),'TransactionController');

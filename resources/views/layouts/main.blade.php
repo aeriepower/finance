@@ -7,13 +7,13 @@ ini_set('xdebug.max_nesting_level', 3000);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <title>Lumino - Dashboard</title>
+    <title>Finance</title>
 
     {!!Html::style('css/bootstrap.min.css')!!}
     {!!Html::style('css/datepicker3.css')!!}
     {!!Html::style('css/styles.css')!!}
 
-    <!--Icons--><script src=""></script>
+    <!--Icons-->
     {!! Html::script('js/lumino.glyphs.js') !!}
 
     <!--[if lt IE 9]>
