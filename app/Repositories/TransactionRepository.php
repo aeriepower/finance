@@ -27,7 +27,13 @@ class TransactionRepository
      */
     public function byId($id)
     {
-        return Transaction::find($id);
+        if (Cache::has('byId' . $id)) {
+            $transaction =  Cache::get('byId' . $id);
+        } else {
+            $transaction = Transaction::find($id);
+            Cache::put('byId' . $id, $transaction, 1);
+        }
+        return $transaction;
     }
 
     /**
@@ -64,15 +70,12 @@ class TransactionRepository
      */
     public function uncategorized()
     {
-        $uncategorizedTransactions = Cache::remember('uncategorized', 1, function () {
-            return Transaction::select(DB::raw('*'))
-                ->where('category_id', '=', null)
-                ->where('user_id', '=', $this->user->id)
-                ->groupBy('concept')
-                ->orderBy('datetime', 'desc')
-                ->get();
-        });
-        return $uncategorizedTransactions;
+        return Transaction::select(DB::raw('*'))
+            ->where('category_id', '=', null)
+            ->where('user_id', '=', $this->user->id)
+            ->groupBy('concept')
+            ->orderBy('datetime', 'desc')
+            ->get();
     }
 
     /**
@@ -82,13 +85,19 @@ class TransactionRepository
      */
     public function lastTransaction()
     {
-        $lastTransaction = Cache::remember('lastTransaction', 1, function () {
-
-            return Transaction::where('user_id', $this->user->id)
+        return Transaction::where('user_id', $this->user->id)
                 ->orderBy('id', 'desc')
                 ->take(1)
                 ->get();
-        });
-        return $lastTransaction;
     }
+
+
+    public function accountBalanceSummary(){
+        return Transaction::where('user_id', $this->user->id)
+            ->where(DB::raw('YEAR(datetime)'), '=', DB::raw('YEAR(CURDATE())'))
+            ->orderBy('datetime', 'asc')
+            ->groupBy(DB::raw("DATE(datetime)"))
+            ->get(array('account_balance', 'datetime'));
+    }
+    
 }

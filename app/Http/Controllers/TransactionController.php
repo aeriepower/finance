@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\TransactionRepository;
 use App\Repositories\CategoryRepository;
 
+/**
+ * This controller's mission is to manage the processes
+ * to show the views of transaction's section
+ *
+ * Class TransactionController
+ * @package Finance\Http\Controllers
+ */
 class TransactionController extends Controller
 {
 
