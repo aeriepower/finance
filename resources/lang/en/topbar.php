@@ -5,5 +5,6 @@ return [
     'user' => 'User',
     'profile' => 'Profile',
     'logout' => 'Logout',
-    'settings' => 'Settings'
+    'settings' => 'Settings',
+    'greeting' => 'Hello',
 ];

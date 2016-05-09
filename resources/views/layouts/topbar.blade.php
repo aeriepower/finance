@@ -8,11 +8,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#"><span>my</span>Finance</a>
+            @if(Auth::check())
             <ul class="user-menu">
                 <a href="{!! route('notice') !!}" class="notice"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a>
                 <li class="dropdown pull-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ trans('topbar.user') }}
+                        <svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ trans('topbar.greeting') }}, {{ Auth::user()->name }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
@@ -22,6 +23,13 @@
                     </ul>
                 </li>
             </ul>
+            @else
+                <ul class="user-menu">
+                    <li>
+                        <a href="/{{ trans('routes.login') }}">Empezar</a>
+                    </li>
+                </ul>
+            @endif
         </div>
 
     </div><!-- /.container-fluid -->
