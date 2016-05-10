@@ -1,4 +1,4 @@
-<div class="alert bg-danger" role="alert">
+<div class="alert bg-warning" role="alert">
     <svg class="glyph stroked empty-message"><use xlink:href="#stroked-empty-message"></use></svg>
         {{ $msg }}
     <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>

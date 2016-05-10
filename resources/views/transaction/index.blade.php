@@ -5,7 +5,9 @@
     {!!Html::style('css/bootstrap-table.css')!!}
 @stop
 @section('content')
-
+    @if(!empty($message))
+        @include('layouts.elements.alert',['msg' => $message])
+    @endif
     @include('layouts.elements.title')
     <div class="row">
         <div class="col-lg-12">
