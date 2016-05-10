@@ -11,18 +11,21 @@
 |
 */
 
-Route::get(trans('/'),function(){
+Route::get(trans('/'), function () {
     return View::make("landing");
 })->name(trans('landing'));
-Route::get(trans('routes.home'),'ReportController@index');
-Route::resource(trans('routes.transactions'),'TransactionController');
-Route::resource(trans('routes.user'),'UserController');
-Route::resource(trans('routes.login'),'LoginController');
-Route::get('logout', 'LoginController@logout');
 
-// Analytic controller
-Route::get(trans('routes.analysis'), 'AnalyticController@index');
-Route::post(trans('routes.analysis'), 'AnalyticController@index');
-Route::get(trans('routes.concept'),'TransactionController@concept')->name('concept');
-Route::get(trans('routes.notice'),'TransactionController@notice')->name('notice');
-Route::get(trans('routes.transactionByDate') . '{date}','TransactionController@byDate');
+Route::group(['middleware' => ['web']], function () {
+    Route::get(trans('routes.home'), 'ReportController@index');
+    Route::resource(trans('routes.transactions'), 'TransactionController');
+    Route::resource(trans('routes.user'), 'UserController');
+    Route::resource(trans('routes.login'), 'LoginController');
+    Route::get('logout', 'LoginController@logout');
+
+    // Analytic controller
+    Route::get(trans('routes.analysis'), 'AnalyticController@index');
+    Route::post(trans('routes.analysis'), 'AnalyticController@index');
+    Route::get(trans('routes.concept'), 'TransactionController@concept')->name('concept');
+    Route::get(trans('routes.notice'), 'TransactionController@notice')->name('notice');
+    Route::get(trans('routes.transactionByDate') . '{date}', 'TransactionController@byDate');
+});
