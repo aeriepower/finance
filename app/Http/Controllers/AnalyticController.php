@@ -2,13 +2,30 @@
 
 namespace Finance\Http\Controllers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Finance\Transaction;
 use Finance\Http\Requests;
+use App\Repositories\TransactionRepository;
 
 class AnalyticController extends Controller
 {
+
+
+    protected $TransactionRepo;
+    protected $user;
+
+    /**
+     * AnalyticController constructor.
+     * @param TransactionRepository $transactionRepository
+     */
+    public function __construct(TransactionRepository $transactionRepository) {
+        $this->TransactionRepo = $transactionRepository;
+        $this->middleware('auth');
+        $this->user = Auth::user();
+    }
+
     public function index(Request $request)
     {
         $dateFrom = isset($request['dateFrom']) ? date('Y-m-d', strtotime($request['dateFrom'])) : '2016-01-01';
@@ -40,17 +57,7 @@ class AnalyticController extends Controller
      */
     private function getCumulativeBilling($dateFrom, $dateTo)
     {
-        $transactions = Transaction::select(DB::raw('
-            SUM(case when billing = 1 then amount else 0 end) as negative,
-            SUM(case when billing = 0 then amount else 0 end) as positive,
-            datetime
-        '))
-            ->whereBetween('datetime', array($dateFrom, $dateTo))
-            ->where('exception', '=', 0)
-            ->groupBy(DB::raw('datetime'))
-            ->orderBy('datetime', 'ASC')
-            ->get();
-
+        $transactions = $this->TransactionRepo->getCumulativeBillingBetweenDates($dateFrom, $dateTo);
 
         $labels = array();
         $line1 = array(); // Positivos
@@ -74,24 +81,7 @@ class AnalyticController extends Controller
 
     private function getCumulativeBillingByCategory($dateFrom, $dateTo)
     {
-        $transactions = Transaction::select(DB::raw('
-            SUM(case when category.parent_id = 1 then amount else 0 end) as category1,
-            SUM(case when category.parent_id = 2 then amount else 0 end) as category2,
-            SUM(case when category.parent_id = 3 then amount else 0 end) as category3,
-            SUM(case when category.parent_id = 4 then amount else 0 end) as category4,
-            SUM(case when category.parent_id = 5 then amount else 0 end) as category5,
-            SUM(case when category.parent_id = 6 then amount else 0 end) as category6,
-            SUM(case when category.parent_id = 7 then amount else 0 end) as category7,
-            SUM(case when category.parent_id = 8 then amount else 0 end) as category8,
-            DATE(datetime) as datetime
-        '))
-            ->join('category', 'transaction.category_id', '=', 'category.id')
-            ->where('exception', '=', 0)
-            ->whereBetween('datetime', array($dateFrom, $dateTo))
-            ->groupBy(DB::raw('DATE(datetime)'))
-            ->orderBy('datetime', 'ASC')
-            ->get();
-
+        $transactions = $this->TransactionRepo->getCumulativeBillingByCategoryBetweenDates($dateFrom, $dateTo);
 
         $labels = array();
         $line1 = array();
@@ -139,20 +129,20 @@ class AnalyticController extends Controller
             $cumulative8 = $cumulative8+ ($transaction->category8 * -1);
             $line8[] = $cumulative8;
         }
-        return
-            array(
-                'labels' => json_encode($labels),
-                'lines' => array(
-                    'line1' => json_encode($line1),
-                    'line2' => json_encode($line2),
-                    'line3' => json_encode($line3),
-                    'line4' => json_encode($line4),
-                    'line5' => json_encode($line5),
-                    'line6' => json_encode($line6),
-                    'line7' => json_encode($line7),
-                    'line8' => json_encode($line8),
-                )
-            );
+
+        return array(
+            'labels' => json_encode($labels),
+            'lines' => array(
+                'line1' => json_encode($line1),
+                'line2' => json_encode($line2),
+                'line3' => json_encode($line3),
+                'line4' => json_encode($line4),
+                'line5' => json_encode($line5),
+                'line6' => json_encode($line6),
+                'line7' => json_encode($line7),
+                'line8' => json_encode($line8),
+            )
+        );
     }
 
     /**

@@ -52,11 +52,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::select(DB::raw('*'))
-            ->whereBetween('datetime', array('2016-01-01', '2016-01-31'))
-            ->orderBy('datetime', 'Desc')
-            ->get();
-
+        $transactions = $this->TransactionRepo->getAllBetweenDates('2016-01-01', '2016-01-31');
 
         return view('transaction.index', [
             'title' => trans('helper.transaction'),
@@ -106,7 +102,6 @@ class TransactionController extends Controller
         }
 
         $lastTransaction = $this->TransactionRepo->lastTransaction();
-
 
         if (isset($lastTransaction[0])) {
             $account_balance = $lastTransaction[0]->account_balance + $request['amount'];
@@ -260,11 +255,7 @@ class TransactionController extends Controller
      */
     public function concept($concept)
     {
-        $transactions = Transaction::select(DB::raw('*'))
-            ->where('concept', '=', $concept)
-            ->where('user_id', '=', $this->user->id)
-            ->orderBy('datetime', 'Desc')
-            ->get();
+        $transactions = $this->TransactionRepo->byConcept($concept);
 
         return view('transaction.index', [
             'title' => trans('helper.transaction'),
@@ -280,7 +271,6 @@ class TransactionController extends Controller
     public function notice()
     {
         $transactions = $this->TransactionRepo->uncategorized();
-
 
         return view('transaction.index', [
             'title' => trans('helper.transaction'),
