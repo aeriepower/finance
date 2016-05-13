@@ -3,6 +3,7 @@
 namespace Finance\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::extend(function($value, $compiler){
+            $value = preg_replace('/(\s*)@switch\((.*)\)(?=\s)/', '$1<?php switch($2): ?>', $value);
+            $value = preg_replace('/(\s*)@endswitch(?=\s)/', '$1<?php endswitch; ?>', $value);
+            $value = preg_replace('/(\s*)@case\((.*)\)(?=\s)/', '$1<?php case $2: ?>', $value);
+            $value = preg_replace('/(?<=\s)@default(?=\s)/', '<?php default: ?>', $value);
+            $value = preg_replace('/(?<=\s)@break(?=\s)/', '<?php break; ?>', $value);
+            return $value;});
     }
 
     /**
