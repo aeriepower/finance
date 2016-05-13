@@ -47,19 +47,19 @@ class ReportController extends Controller
         );
 
         $data['panels']['panel2'] = array(
-            'type' => 'info',
+            'type' => 'warning',
             'title' => 'Prevision',
             'content' => 'content'
         );
 
         $data['panels']['panel3'] = array(
-            'type' => 'warning',
+            'type' => 'danger',
             'title' => 'Gastos',
             'content' => 'content'
         );
 
         $data['panels']['panel4'] = array(
-            'type' => 'danger',
+            'type' => 'info',
             'title' => 'Objetivos',
             'content' => 'content'
         );
