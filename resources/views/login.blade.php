@@ -1,3 +1,6 @@
+<?php
+ini_set('xdebug.max_nesting_level', 3000);
+?>
 <!DOCTYPE html>
 <html>
 <head>
