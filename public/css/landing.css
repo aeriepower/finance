@@ -80,7 +80,6 @@ button {
     width: 474px;
     height: 394px;
     left: 85px;
-    z-index: 2;
 }
 .display-content {
     background: transparent;
@@ -96,7 +95,6 @@ button {
     width: 423px;
     height: 277px;
     right: 0;
-    z-index: 1;
 }
 .laptop-content {
     background: transparent;
@@ -111,7 +109,6 @@ button {
     width: 284px;
     height: 220px;
     left: 0;
-    z-index: 3;
 }
 .tablet-content {
     background: transparent;
@@ -127,7 +124,6 @@ button {
     width: 101px;
     height: 205px;
     left: 187px;
-    z-index: 4;
 }
 .movil-content {
     background: transparent;
