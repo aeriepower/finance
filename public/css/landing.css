@@ -73,11 +73,12 @@ button {
     background-image: url('../img/landing/app-background.jpg');
 }
 .filter {
-    background: rgb(30,87,153);
-    background: -moz-linear-gradient(top,  rgba(30,87,153,0.6) 0%, rgba(41,137,216,0.6) 95%, rgba(125,185,232,0.6) 100%);
-    background: -webkit-linear-gradient(top,  rgba(30,87,153,0.6) 0%,rgba(41,137,216,0.6) 95%,rgba(125,185,232,0.6) 100%);
-    background: linear-gradient(to bottom,  rgba(30,87,153,0.6) 0%,rgba(41,137,216,0.6) 95%,rgba(125,185,232,0.6) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 );
+    background: rgb(50,204,236);
+    background: -moz-linear-gradient(top,  rgba(50,204,236,0.6) 0%, rgba(182,225,234,0.6) 100%);
+    background: -webkit-linear-gradient(top,  rgba(50,204,236,0.6) 0%,rgba(182,225,234,0.6) 100%);
+    background: linear-gradient(to bottom,  rgba(50,204,236,0.6) 0%,rgba(182,225,234,0.6) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#32ccec', endColorstr='#b6e1ea',GradientType=0 );
+
     display: block;
     height: 80%;
     width: 100%;
