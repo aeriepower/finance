@@ -29,6 +29,8 @@ button {
 .welcome {
     z-index: 1;
     background-image: url('../img/landing/welcome-background.jpg');
+    background-size: cover;
+    background-position: center center;
 }
 .welcome .pp-tableCell{
     /*background-color: #00C176;*/
@@ -37,7 +39,9 @@ button {
 .box {
     display: block;
     height: 50%;
-    width: 50%;
+    background-size: cover;
+    background-position: center center;
+    background-color: #fff;
 }
 .odd {
     float: left;
@@ -64,4 +68,77 @@ button {
     margin-left: 10%;
     text-align: justify;
     font-size: 1vw;
+}
+.mobile {
+    background-image: url('../img/landing/app-background.jpg');
+}
+.filter {
+    background: rgb(30,87,153);
+    background: -moz-linear-gradient(top,  rgba(30,87,153,0.6) 0%, rgba(41,137,216,0.6) 95%, rgba(125,185,232,0.6) 100%);
+    background: -webkit-linear-gradient(top,  rgba(30,87,153,0.6) 0%,rgba(41,137,216,0.6) 95%,rgba(125,185,232,0.6) 100%);
+    background: linear-gradient(to bottom,  rgba(30,87,153,0.6) 0%,rgba(41,137,216,0.6) 95%,rgba(125,185,232,0.6) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 );
+    display: block;
+    height: 80%;
+    width: 100%;
+}
+.content {
+    width: 60vw;
+    margin-top: 15vh;
+    margin-left: 20vw;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+}
+#googlePlay, #appStore {
+    border-radius: 250px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition-duration: 500ms;
+    cursor: pointer;
+}
+#googlePlay:hover, #appStore:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+.content h1 {
+    color: #fff;
+    font-size: 3.5vw;
+    text-align: left;
+}
+.mobile .footer {
+    height: 20%;
+    width: 100%;
+    background: #fff;
+}
+#appStore, #googlePlay{
+    position: relative;
+}
+#iphone {
+    position: absolute;
+}
+#appStore {
+    left: -150%;
+}
+#googlePlay {
+    left: 150%;
+}
+#iphone {
+    right: 0%;
+    top: 1000%;
+}
+#dashboard, #planning {
+
+}
+.box:nth-child(1){
+    width: 100%;
+}
+.box:nth-child(2){
+    width: 0%;
+}
+.box:nth-child(3){
+    width: 0%;
+}
+.box:nth-child(4){
+    width: 100%;
 }

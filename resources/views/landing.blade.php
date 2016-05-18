@@ -36,7 +36,7 @@
     </section>
 
     <section class="tips section">
-        <div class="box odd" id="dashboard">1</div>
+        <div class="box odd" id="dashboard"></div>
         <div class="box even">
             <h3>dashboard</h3>
             <p>{{ trans('landingPage.lorem') }}</p>
@@ -45,17 +45,51 @@
             <h3>planning</h3>
             <p>{{ trans('landingPage.lorem') }}</p>
         </div>
-        <div class="box even" id="planning">4</div>
+        <div class="box even" id="planning"></div>
     </section>
 
-    <section class="responsive section">
-
+    <section class="mobile section">
+        <div class="filter">
+            <div class="content">
+                <h1>Check our mobile App at </h1>
+                <img src="img/landing/app-store.jpg" alt="" id="appStore">
+                <img src="img/landing/google-play.jpg" alt="" id="googlePlay">
+                <img src="img/landing/iphone-filled.png" alt="" id="iphone">
+            </div>
+        </div>
+        <article class="footer"></article>
     </section>
 
 </div>
 
 <script>
-    $('#content').pagepiling();
+    $('#content').pagepiling({
+        loopTop: true,
+        loopBottom: true,
+        scrollingSpeed: 50,
+        navigation: {
+            'position': 'right',
+            'tooltips': ['Welcome', 'Briefing', 'Mobile']
+        },
+        afterLoad: function(anchorLink, index){
+            if(index == 2){
+                $('.box').delay(200).animate({
+                    width: '50%'
+                });
+            }
+            if(index == 3){
+                $('#iphone').delay(1500).animate({
+                    top: '50%'
+                });
+                $('#appStore').delay(100).animate({
+                    left: '0%'
+                });
+                $('#googlePlay').delay(500).animate({
+                    left: '0%'
+                });
+            }
+        }
+    });
 </script>
 </body>
 </html>
